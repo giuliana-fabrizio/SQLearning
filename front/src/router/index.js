@@ -1,19 +1,19 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import HomeView from "../views/HomeView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/',
-        name: 'home',
+        path: "/",
+        name: "home",
         component: HomeView
     },
     {
-        path: '/register',
-        name: 'register',
-        component: () => import('../views/CreateAnAccountView.vue')
+        path: "/register",
+        name: "register",
+        component: () => import("../views/CreateAnAccountView.vue")
     }
 ];
 

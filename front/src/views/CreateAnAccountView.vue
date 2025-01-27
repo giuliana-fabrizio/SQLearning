@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import ProfileComponent from '@/components/ProfileComponent.vue';
+import ProfileComponent from "@/components/ProfileComponent.vue";
 
 export default {
-    name: 'CreateAnAccountView',
+    name: "CreateAnAccountView",
     components: {
         ProfileComponent
     }
