@@ -1,0 +1,14 @@
+/* ============================================================================ authentification */
+
+.img-create-an-account {
+    height: 100%;
+    object-fit: cover;
+}
+
+.bg-create-an-account,
+.bg-create-an-account:focus,
+.bg-create-an-account:-webkit-autofill {
+    border: #ccc;
+    border-bottom: 2px solid #49454F;
+    -webkit-box-shadow: 0 0 0px 1000px #ccc inset !important;
+}
