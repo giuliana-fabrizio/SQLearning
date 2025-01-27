@@ -41,7 +41,13 @@
                             v-model="id_field"
                             class="form-control rounded-0 bg-create-an-account"
                             required>
-                            <option value="" selected>Choisir...</option>
+                            <option value="" disabled>Choisir...</option>
+                            <option
+                                v-for="(field, index) in fields"
+                                :key="index"
+                                :value="field.id">
+                                {{ field.name }}
+                            </option>
                         </select>
                     </div>
 
@@ -78,20 +84,21 @@
 </template>
 
 <script>
-import { purple } from '@/utils/colors';
+import axios from "axios";
+import { purple } from "@/utils/colors";
 
 export default {
-    name: 'ProfileComponent',
+    name: "ProfileComponent",
 
     data: () => ({
         fields: [],
 
-        avatar: '',
-        firstname: '',
-        name: '',
-        id_field: -1,
-        mail: '',
-        password: '',
+        avatar: "",
+        firstname: "",
+        name: "",
+        id_field: "",
+        mail: "",
+        password: "",
 
         purple
     }),
@@ -100,7 +107,16 @@ export default {
         user: Object
     },
 
-    created() {},
+    created() {
+        const port = process.env.VUE_APP_SERVER_PORT;
+        axios.get(`http://localhost:${port}/user/getFields`)
+            .then(res => {
+                this.fields = res.data.data;
+            })
+            .catch((error) => {
+                console.error(`Error : ${error}`);
+            });
+    },
 
     methods: {
         submit() {
