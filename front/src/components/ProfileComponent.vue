@@ -135,7 +135,8 @@ export default {
                     this.$router.push({ name: 'home' });
                 })
                 .catch((error) => {
-                    console.error(`Error : ${error}`);
+                    error = error.response.data.data
+                    alert(error.message + "\n" + error.details);
                 });
         }
     }
