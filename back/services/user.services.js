@@ -10,6 +10,25 @@ const getFields = (callback) => {
     });
 }
 
+const insert = (user, callback) => {
+    db.run(queries.insert, [
+        user.firstname,
+        user.name,
+        user.mail,
+        user.password,
+        user.avatar,
+        false,
+        user.id_field
+    ], (error, res) => {
+        if (error) {
+            console.error(error);
+            return callback(error);
+        }
+        return callback(null, res);
+    });
+}
+
 module.exports = {
-    getFields: getFields
+    getFields: getFields,
+    insert: insert
 }
