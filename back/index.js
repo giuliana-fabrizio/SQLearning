@@ -38,6 +38,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions));
+app.use(express.json()); // middleware pour parser les requêtes avec un body JSON
 
 // ============================================== Routes
 
