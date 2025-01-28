@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-center position-relative pt-4">
         <div class="col-10 col-sm-8 col-md-6 col-lg-4">
             <h2 class="mb-5 mt-5 text-center text-white">SQLEARNING</h2>
-            <form class="p-4" style="background: #ccc;">
+            <form @submit.prevent="submit()" class="p-4" style="background: #ccc;">
                 <fieldset>
                     <div class="mb-3">
                         <label for="avatar" class="fw-bolder ps-0">Avatar</label>
@@ -72,7 +72,7 @@
                     </div>
 
                     <button
-                        @click="submit()"
+                        type="submit"
                         class="btn btn-submit text-white w-100"
                         :style="{ background: purple.color_11 }">
                         Valider
@@ -92,6 +92,7 @@ export default {
 
     data: () => ({
         fields: [],
+        port: 0,
 
         avatar: "",
         firstname: "",
@@ -108,8 +109,8 @@ export default {
     },
 
     created() {
-        const port = process.env.VUE_APP_SERVER_PORT;
-        axios.get(`http://localhost:${port}/user/getFields`)
+        this.port = process.env.VUE_APP_SERVER_PORT;
+        axios.get(`http://localhost:${this.port}/user/getFields`)
             .then(res => {
                 this.fields = res.data.data;
             })
@@ -119,8 +120,23 @@ export default {
     },
 
     methods: {
-        submit() {
-            console.log(this.avatar, this.firstname, this.name, this.id_field, this.mail, this.password)
+        async submit() {
+            await axios.post(`http://localhost:${this.port}/user/create`,
+                {
+                    firstname: this.firstname,
+                    name: this.name,
+                    mail: this.mail,
+                    password: this.password,
+                    avatar: this.avatar,
+                    id_field: this.id_field
+                }
+            )
+                .then(() => {
+                    this.$router.push({ name: 'home' });
+                })
+                .catch((error) => {
+                    console.error(`Error : ${error}`);
+                });
         }
     }
 }
