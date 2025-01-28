@@ -3,6 +3,8 @@ const express = require('express');
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
+const db_routers = require("./routes/db.routes");
+
 // ======================================================================= Load environment variables
 
 dotenv.config();
@@ -29,6 +31,7 @@ const swaggerDocs = swaggerJsdoc(swaggerOption);
 const app = express();
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use("/database", db_routers);
 
 app.listen(port, () => {
     console.log(`Server is listenning on ${port} port.`);
