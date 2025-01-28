@@ -12,7 +12,10 @@ const getFields = (_, res) => {
 const insert = (req, res) => {
     services.insert(req.body, (error, data) => {
         if (error) {
-            if (error.code === ("EMAIL_ALREADY_USED")) {
+            if (
+                error.code === "EMAIL_ALREADY_USED" ||
+                error.code === "PASSWORD_MISMATCH"
+            ) {
                 return res.status(409).send({ success: 0, data: error });
             }
             return res.status(500).send({ success: 0, data: error });

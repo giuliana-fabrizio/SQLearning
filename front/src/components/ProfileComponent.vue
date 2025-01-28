@@ -65,8 +65,18 @@
                         <label for="password" class="fw-bolder ps-0">Mot de passe</label>
                         <input
                             id="password"
-                            type="text"
+                            type="password"
                             v-model="password"
+                            class="form-control text-center rounded-0 bg-create-an-account"
+                            required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="check_password" class="fw-bolder ps-0">Confirmer le mot de passe</label>
+                        <input
+                            id="check_password"
+                            type="password"
+                            v-model="check_password"
                             class="form-control text-center rounded-0 bg-create-an-account"
                             required>
                     </div>
@@ -100,6 +110,7 @@ export default {
         id_field: "",
         mail: "",
         password: "",
+        check_password: "",
 
         purple
     }),
@@ -127,6 +138,7 @@ export default {
                     name: this.name,
                     mail: this.mail,
                     password: this.password,
+                    check_password: this.check_password,
                     avatar: this.avatar,
                     id_field: this.id_field
                 }

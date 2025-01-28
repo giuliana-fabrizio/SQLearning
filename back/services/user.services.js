@@ -20,6 +20,14 @@ const insert = (user, callback) => {
             });
         }
 
+        if (user.check_password != user.password) {
+            return callback({
+                code: "PASSWORD_MISMATCH",
+                message: "Les mots de passe ne correspondent pas.",
+                details: "Assurez-vous que les deux champs de mot de passe sont identiques."
+            });            
+        }
+
         db.run(queries.insert, [
             user.firstname,
             user.name,
