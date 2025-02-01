@@ -3,7 +3,7 @@
         <div class="p-3 row">
             <img src="" alt="Image" class="col-1">
             <div class="col-10">
-                <p class="fs-5 mb-1">{{ data.title }}</p>
+                <p class="fs-5 mb-1">{{ data.name }}</p>
                 <p
                     class="mb-1 text-break"
                     style="color: #49454F">
