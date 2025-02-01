@@ -1,3 +1,4 @@
+const cors = require("cors");
 const dotenv = require('dotenv');
 const express = require('express');
 const swaggerJsdoc = require("swagger-jsdoc");
@@ -29,6 +30,15 @@ const swaggerDocs = swaggerJsdoc(swaggerOption);
 // ======================================================================= Application setup
 
 const app = express();
+
+const corsOptions = {
+    credentials: true,
+    optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
+
+// ============================================== Routes
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use("/database", db_routers);
