@@ -1,0 +1,17 @@
+/* ============================================================================ common */
+
+.title {
+    color: #49454F
+}
+
+
+/* ============================================================================ list databases */
+
+.search-by-name,
+.search-by-name:hover,
+.search-by-name:focus,
+.search-by-name:-webkit-autofill {
+    background: #f7f7f7 !important;
+    border: none !important;
+    outline: none !important;
+}
