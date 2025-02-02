@@ -15,3 +15,10 @@
     border: none !important;
     outline: none !important;
 }
+
+.custom-tooltip {
+    background: #3a373f;
+    border-radius: .30rem;
+    color: white;
+    padding: 5px 10px;
+}

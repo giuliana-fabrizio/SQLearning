@@ -5,18 +5,20 @@
             <div class="col-10">
                 <p class="fs-5 mb-1">{{ data.name }}</p>
                 <p
-                    class="mb-1 text-break"
+                    class="mb-1"
                     style="color: #49454F">
-                    {{ data.description }}
+                    {{ data.description.substring(0, 120) + "..." }}
                 </p>
             </div>
             <div class="align-items-start col-1 d-flex justify-content-end">
                 <div
                     data-bs-toggle="tooltip"
-                    data-bs-title="Nombre de personnes inscrites"
+                    data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Nombre d'inscrits"
                     class="badge me-1 mt-1 ps-2 pe-2 rounded-circle"
                     :style="{ background: purple.color_8 }">
-                    <span class="text-white">{{ data.peoples }}</span>
+                    <span class="text-white" style="font-size: small;">{{ data.peoples }}</span>
                 </div>
                 <button class="btn p-0">
                     <i class="bi bi-three-dots-vertical icon"></i>
