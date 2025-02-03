@@ -1,8 +1,10 @@
 <template>
     <div :style="{ background: purple.color_1 }">
         <div class="p-3 row">
-            <img src="" alt="Image" class="col-1">
-            <div class="col-10">
+            <div class="col-sm-3 col-md-2 col-lg-1 d-none d-sm-block">
+                <img :src="require(`@/assets/${data.avatar}`)" alt="Image" class="w-100">
+            </div>
+            <div class="col-8 col-md-9 col-lg-10">
                 <p class="fs-5 mb-1">{{ data.name }}</p>
                 <p
                     class="mb-1"
@@ -10,7 +12,7 @@
                     {{ data.description.substring(0, 120) + "..." }}
                 </p>
             </div>
-            <div class="align-items-start col-1 d-flex justify-content-end">
+            <div class="align-items-start col-4 col-sm-1 d-flex justify-content-end">
                 <div
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
@@ -26,7 +28,7 @@
             </div>
         </div>
         <div
-            class="border-2 border-bottom mx-auto pb-1"
+            class="border-2 border-bottom mx-auto pb-2"
             style="border-color: #CAC4D0 !important; width: 95%">
         </div>
     </div>
@@ -47,7 +49,9 @@ export default {
     },
 
     mounted() {
-        const tooltipTriggerList = [].slice.call(this.$el.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        const tooltipTriggerList = [].slice.call(
+            this.$el.querySelectorAll('[data-bs-toggle="tooltip"]')
+        );
         tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
