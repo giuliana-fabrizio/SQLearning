@@ -1,25 +1,37 @@
 <template>
     <div class="container">
         <TitleComponent title="Bases de données" />
-        <div class="d-flex justify-content-between mt-5 mb-4">
-            <button class="btn border border-2 ps-4 pe-4 rounded-pill">
+        <div class="d-flex flex-column flex-sm-row justify-content-between mt-5">
+            <button class="btn border border-2 mb-4 pe-4 ps-4 rounded-pill">
                 <i class="bi bi-filter"></i>
                 Filtrer
             </button>
-            <div
-                class="align-items-center rounded-pill row text-center search-by-name"
-                style="width: 35%">
-                <i class="bi bi-search col-12 col-md-2" style="color: #828282"></i>
-                <input
-                    id="search"
-                    type="text"
-                    v-model="search_name"
-                    class="col-12 col-md-10 search-by-name"
-                    placeholder="Rechercher par nom">
+            <div class="d-none d-sm-block mb-4">
+                <div class="
+                        align-items-center
+                        d-flex
+                        h-100
+                        p-1
+                        pe-3
+                        ps-3
+                        pe-md-5
+                        ps-md-5
+                        rounded-pill
+                        search-by-name
+                    ">
+                    <i class="bi bi-search" style="color: #828282"></i>
+                    <input
+                        id="search"
+                        type="text"
+                        v-model="search_name"
+                        class="rounded-pill text-center search-by-name"
+                        placeholder="Rechercher par nom">
+                </div>
             </div>
             <!-- TODO v-if admin -->
             <button
-                class="btn ps-4 pe-4 rounded-pill text-white"
+                @click="() => { this.$router.push({ name: 'home' }); }"
+                class="btn mb-4 pe-4 ps-4 rounded-pill text-white"
                 :style="{ background: purple.color_11 }">
                 <i class="bi bi-plus-circle me-1"></i>
                 Ajouter
