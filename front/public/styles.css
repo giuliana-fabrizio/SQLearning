@@ -4,6 +4,10 @@
     color: #49454F
 }
 
+.divider {
+    width: 220px;
+}
+
 
 /* ============================================================================ list databases */
 
@@ -22,3 +26,19 @@
     color: white;
     padding: 5px 10px;
 }
+
+
+color {
+    color: #FEF5FF;
+    color: #FEF7FF;
+    color: #E6E0E9;
+    color: #E8DEF8;
+    color: #EFB8C8;
+    color: #B58392;
+    color: #7E5260;
+    color: #A287A7;
+    color: #CFBCFF;
+    color: #9A83DB;
+    color: #65558F;
+    color: #6750A4
+};

@@ -2,7 +2,8 @@
     <div class="container">
         <TitleComponent title="Bases de données" />
         <div class="d-flex flex-column flex-sm-row justify-content-between mt-5">
-            <button class="btn border border-2 mb-4 pe-4 ps-4 rounded-pill">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#filters_modal"
+                class="btn border border-2 mb-4 pe-4 ps-4 rounded-pill">
                 <i class="bi bi-filter"></i>
                 Filtrer
             </button>
@@ -20,19 +21,13 @@
                         search-by-name
                     ">
                     <i class="bi bi-search" style="color: #828282"></i>
-                    <input
-                        id="search"
-                        type="text"
-                        v-model="search_name"
-                        class="rounded-pill text-center search-by-name"
+                    <input id="search" type="text" v-model="search_name" class="rounded-pill text-center search-by-name"
                         placeholder="Rechercher par nom">
                 </div>
             </div>
             <!-- TODO v-if admin -->
-            <button
-                @click="() => { this.$router.push({ name: 'home' }); }"
-                class="btn mb-4 pe-4 ps-4 rounded-pill text-white"
-                :style="{ background: purple.color_11 }">
+            <button @click="() => { this.$router.push({ name: 'home' }); }"
+                class="btn mb-4 pe-4 ps-4 rounded-pill text-white" :style="{ background: purple.color_11 }">
                 <i class="bi bi-plus-circle me-1"></i>
                 Ajouter
             </button>
