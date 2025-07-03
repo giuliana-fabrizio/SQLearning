@@ -90,11 +90,7 @@ export default {
         },
 
         searchByName(e) {
-            if (e.target.value != '') {
-                this.filtered_databases = this.filtered_databases.filter(db => db.name.toLowerCase().includes(e.target.value.toLowerCase()));
-            } else {
-                this.filtered_databases = this.databases;
-            }
+            this.filtered_databases = this.databases.filter(db => db.name.toLowerCase().includes(e.target.value.toLowerCase()));
         }
     }
 }
