@@ -20,25 +20,17 @@
     outline: none !important;
 }
 
-.custom-tooltip {
-    background: #3a373f;
-    border-radius: .30rem;
-    color: white;
-    padding: 5px 10px;
-}
-
-
 color {
-    color: #FEF5FF;
-    color: #FEF7FF;
-    color: #E6E0E9;
-    color: #E8DEF8;
-    color: #EFB8C8;
-    color: #B58392;
-    color: #7E5260;
-    color: #A287A7;
-    color: #CFBCFF;
-    color: #9A83DB;
-    color: #65558F;
-    color: #6750A4
-};
+    color: #FEF5FF; /* 1 */
+    color: #FEF7FF; /* 2 */
+    color: #E6E0E9; /* 3 */
+    color: #E8DEF8; /* 4 */
+    color: #EFB8C8; /* 5 */
+    color: #B58392; /* 6 */
+    color: #7E5260; /* 7 */
+    color: #A287A7; /* 8 */
+    color: #CFBCFF; /* 9 */
+    color: #9A83DB; /* 10 */
+    color: #65558F; /* 11 */
+    color: #6750A4; /* 12 */
+}

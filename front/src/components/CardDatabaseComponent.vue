@@ -16,7 +16,6 @@
                 <div
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
-                    data-bs-custom-class="custom-tooltip"
                     data-bs-title="Nombre d'inscrits"
                     class="badge me-1 mt-1 ps-2 pe-2 rounded-circle"
                     :style="{ background: purple.color_8 }">
