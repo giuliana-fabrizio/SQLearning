@@ -18,8 +18,8 @@
                         search-by-name
                     ">
                     <i class="bi bi-search" style="color: #828282"></i>
-                    <input id="search" type="text" v-model="search_name" class="rounded-pill text-center search-by-name"
-                        placeholder="Rechercher par nom">
+                    <input @input="searchByName" id="search" type="text" v-model="search_name"
+                        class="rounded-pill text-center search-by-name" placeholder="Rechercher par nom">
                 </div>
             </div>
             <!-- TODO v-if admin -->
@@ -29,7 +29,7 @@
                 Ajouter
             </button>
         </div>
-        <div v-for="(data, index) in databases" :key="index">
+        <div v-for="(data, index) in filtered_databases" :key="index">
             <CardDatabaseComponent :data="data" />
         </div>
     </div>
@@ -47,6 +47,7 @@ export default {
 
     data: () => ({
         databases: [],
+        filtered_databases: [],
         display_filter: false,
         port: 0,
         search_name: "",
@@ -65,6 +66,7 @@ export default {
         axios.get(`http://localhost:${this.port}/database/get`)
             .then(res => {
                 this.databases = res.data.data;
+                this.filtered_databases = this.databases;
             })
             .catch(error => {
                 console.error(`Error : ${error}`);
@@ -76,15 +78,23 @@ export default {
     methods: {
         applyFilters(filters) {
             this.filters = JSON.parse(JSON.stringify(filters));
-            console.log(this.filters, filters)
 
             axios.get(`http://localhost:${this.port}/database/get?min_people=${this.filters.min_people}&max_people=${this.filters.max_people}&work_status=${this.filters.work_status}`)
                 .then(res => {
                     this.databases = res.data.data;
+                    this.filtered_databases = this.databases;
                 })
                 .catch(error => {
                     console.error(`Error : ${error}`);
                 });
+        },
+
+        searchByName(e) {
+            if (e.target.value != '') {
+                this.filtered_databases = this.filtered_databases.filter(db => db.name.toLowerCase().includes(e.target.value.toLowerCase()));
+            } else {
+                this.filtered_databases = this.databases;
+            }
         }
     }
 }
