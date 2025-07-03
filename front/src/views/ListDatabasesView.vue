@@ -2,11 +2,8 @@
     <div class="container">
         <TitleComponent title="Bases de données" />
         <div class="d-flex flex-column flex-sm-row justify-content-between mt-5">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#filters_modal"
-                class="btn border border-2 mb-4 pe-4 ps-4 rounded-pill">
-                <i class="bi bi-filter"></i>
-                Filtrer
-            </button>
+            <FiltersComponent @filters="applyFilters" />
+
             <div class="d-none d-sm-block mb-4">
                 <div class="
                         align-items-center
@@ -42,6 +39,7 @@
 import axios from 'axios';
 import { purple } from '@/utils/colors';
 import TitleComponent from '@/components/TitleComponent.vue';
+import FiltersComponent from '@/components/FiltersComponent.vue';
 import CardDatabaseComponent from '@/components/CardDatabaseComponent.vue';
 
 export default {
@@ -49,6 +47,7 @@ export default {
 
     data: () => ({
         databases: [],
+        display_filter: false,
         port: 0,
         search_name: "",
 
@@ -57,6 +56,7 @@ export default {
 
     components: {
         TitleComponent,
+        FiltersComponent,
         CardDatabaseComponent
     },
 
@@ -69,7 +69,23 @@ export default {
             .catch(error => {
                 console.error(`Error : ${error}`);
             });
-        // this.data.description = this.data.description.slice(0, 300) + "...";
+
+        this.display_filter = this.$store.getters.getDisplayFilter;
+    },
+
+    methods: {
+        applyFilters(filters) {
+            this.filters = JSON.parse(JSON.stringify(filters));
+            console.log(this.filters, filters)
+
+            axios.get(`http://localhost:${this.port}/database/get?min_people=${this.filters.min_people}&max_people=${this.filters.max_people}&work_status=${this.filters.work_status}`)
+                .then(res => {
+                    this.databases = res.data.data;
+                })
+                .catch(error => {
+                    console.error(`Error : ${error}`);
+                });
+        }
     }
 }
 </script>

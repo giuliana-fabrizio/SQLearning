@@ -1,7 +1,8 @@
 const services = require('../services/db.services');
 
 const getDatabases = (req, res) => {
-    services.getDatabases((error, data) => {
+    const filters = req.query;
+    services.getDatabases(filters, (error, data) => {
         if (error) {
             return res.status(500).send({ success: 0, data: error });
         }
