@@ -10,7 +10,7 @@ const getFields = (_, res) => {
 }
 
 const insert = (req, res) => {
-    services.insert(req.body, (error, data) => {
+    services.insert(req.body.user, (error, data) => {
         if (error) {
             if (
                 error.code === "EMAIL_ALREADY_USED" ||

@@ -37,7 +37,7 @@ const insert = (user, callback) => {
             false,
             user.id_field
         ], (error, res) => {
-            if (error) {$
+            if (error) {
                 return callback(error);
             }
             return callback(null, res);
