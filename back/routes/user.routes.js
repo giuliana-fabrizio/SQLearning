@@ -41,9 +41,6 @@ router.get("/getFields", controllers.getFields);
  *                  mail:
  *                      type: string
  *                      example: "jeanne.dupon@gmail.com"
- *                  password:
- *                      type: string
- *                      example: "password"
  *                  avatar:
  *                      type: string
  *                      example: "avatar"
