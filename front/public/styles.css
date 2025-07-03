@@ -9,6 +9,14 @@
 }
 
 
+/* ============================================================================ filters */
+
+.form-check-input:checked {
+    background-color: #6750A4 !important;
+    border-color: #6750A4 !important;
+}
+
+
 /* ============================================================================ list databases */
 
 .search-by-name,
