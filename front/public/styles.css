@@ -13,3 +13,8 @@
     border-bottom: 2px solid #49454F !important;
     -webkit-box-shadow: 0 0 0px 1000px #ccc inset !important;
 }
+
+
+.auth-actions {
+    font-size: 15px;
+}
