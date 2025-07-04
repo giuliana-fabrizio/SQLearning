@@ -24,8 +24,8 @@
                                     class="form-control text-center rounded-0 bg-create-an-account" required>
                             </div>
 
-                            <div class="text-end auth-actions">
-                                <router-link to="/register" class="fw-bolder text-decoration-none"
+                            <div class="text-end">
+                                <router-link to="/reset_password" class="fw-bolder text-decoration-none"
                                     :style="{ color: purple.color_8 }">Mot de passe oublié ?</router-link>
                             </div>
 
@@ -36,7 +36,7 @@
                         </fieldset>
                     </form>
 
-                    <div class="d-flex align-items-center justify-content-center mt-3 auth-actions">
+                    <div class="d-flex align-items-center justify-content-center mt-3">
                         <p class="m-0 me-3">Pas de compte ?</p>
                         <router-link to="/register" class="fw-bolder text-decoration-none"
                             :style="{ color: purple.color_8 }">Inscrivez-vous !</router-link>
