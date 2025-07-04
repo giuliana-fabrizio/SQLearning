@@ -1,8 +1,8 @@
 <template>
     <div class="bg-purple">
         <div class="stars">
-            <div class="central-body">
-                <img class="image-404" src="http://salehriaz.com/404Page/img/404.svg" width="300px">
+            <div class="mx-auto central-body">
+                <img class="image-404 img-fluid" src="http://salehriaz.com/404Page/img/404.svg" width="350px">
             </div>
             <div class="objects">
                 <img class="object_rocket" src="http://salehriaz.com/404Page/img/rocket.svg" width="40px">
@@ -44,7 +44,10 @@ export default {
 }
 
 .central-body {
-    padding: 17% 5% 10% 5%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .image-404 {
@@ -52,6 +55,19 @@ export default {
     z-index: 120;
 }
 
+
+
+/* ======================================================================= moon */
+
+@keyframes moon-orbit {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .earth-moon {
     position: absolute;
@@ -77,16 +93,6 @@ export default {
     top: 90%;
     left: 50%;
     transform: translateX(-50%);
-}
-
-@keyframes moon-orbit {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 
@@ -306,7 +312,7 @@ export default {
 
 /* ======================================================================= responsive */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
     .earth-moon {
         top: 12%;
     }
@@ -321,10 +327,6 @@ export default {
 
     .image-404 {
         width: 250px;
-    }
-
-    .central-body {
-        padding-top: 65%;
     }
 }
 
