@@ -10,6 +10,19 @@ const getFields = (callback) => {
     });
 }
 
+const getEmail = (email, callback) => {
+    db.get(queries.mailFree, [email], (_, res) => {
+        if (res) {
+            return callback(null, res);
+        }
+        return callback({
+            code: "EMAIL_NOT_FOUND",
+            message: "Erreur: adresse e-mail non trouvée.",
+            details: "Veuillez saisir une adresse e-mail valide ou créer un compte.."
+        })
+    });
+}
+
 const insert = (user, callback) => {
     db.get(queries.mailFree, [user.mail], (_, res) => {
         if (res) {
@@ -39,5 +52,6 @@ const insert = (user, callback) => {
 
 module.exports = {
     getFields: getFields,
+    getEmail: getEmail,
     insert: insert
 }

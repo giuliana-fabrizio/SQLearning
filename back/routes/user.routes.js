@@ -20,6 +20,28 @@ router.get("/getFields", controllers.getFields);
 
 /**
  * @swagger
+ * /user/verify/{email}:
+ *   get:
+ *      description: Use to verify user's email
+ *      tags:
+ *          - USER
+ *      parameters:
+ *          - in: path
+ *            name: email
+ *            type: string
+ *            required: true
+ *      responses:
+ *          "200":
+ *              description: User gotten successfully
+ *          "404":
+ *              description: User not found
+ *          "500":
+ *              description: Internal server error
+ */
+router.get("/verify/:email", controllers.getEmail);
+
+/**
+ * @swagger
  * /user/create:
  *   post:
  *      description: Use to register a user
