@@ -20,6 +20,28 @@ router.get("/getFields", controllers.getFields);
 
 /**
  * @swagger
+ * /user/get_with_email/{email}:
+ *   get:
+ *      description: Use to verify user's email
+ *      tags:
+ *          - USER
+ *      parameters:
+ *          - in: path
+ *            name: email
+ *            type: string
+ *            required: true
+ *      responses:
+ *          "200":
+ *              description: User gotten successfully
+ *          "404":
+ *              description: User not found
+ *          "500":
+ *              description: Internal server error
+ */
+router.get("/get_with_email/:email", controllers.getEmail);
+
+/**
+ * @swagger
  * /user/create:
  *   post:
  *      description: Use to register a user
@@ -27,29 +49,36 @@ router.get("/getFields", controllers.getFields);
  *          - USER
  *      parameters:
  *          - in: body
- *            name: User
+ *            name: user
  *            schema:
  *              type: object
- *              required: true
+ *              required:
+ *                - user
  *              properties:
- *                  firstname:
- *                      type: string
- *                      example: "Jeanne"
- *                  name:
- *                      type: string
- *                      example: "Dupon"
- *                  mail:
- *                      type: string
- *                      example: "jeanne.dupon@gmail.com"
- *                  avatar:
- *                      type: string
- *                      example: "avatar"
- *                  is_admin:
- *                      type: logical
- *                      example: false
- *                  id_field:
- *                      type: integer
- *                      example: 1
+ *                  user:
+ *                    type: object
+ *                    properties:
+ *                      id:
+ *                        type: string
+ *                        example: "mSc99LTgQdZnQoUwOwy"
+ *                      firstname:
+ *                        type: string
+ *                        example: "Jeanne"
+ *                      name:
+ *                        type: string
+ *                        example: "Dupon"
+ *                      mail:
+ *                        type: string
+ *                        example: "jeanne.dupon@gmail.com"
+ *                      avatar:
+ *                        type: string
+ *                        example: "avatar"
+ *                      is_admin:
+ *                        type: logical
+ *                        example: false
+ *                      id_field:
+ *                        type: integer
+ *                        example: 1
  *      responses:
  *          "200":
  *              description: User added successfully

@@ -21,16 +21,24 @@
 </template>
 
 <script>
+import { AuthEvent } from '@/utils/auth';
+
 export default {
     data() {
         return {
-            items: [
-                { to: '/', icon: 'bi bi-house', label: 'Accueil' },
-                { to: '/databases', icon: 'bi bi-clipboard-data', label: 'Bases de données' },
-                { to: '/profile', icon: 'bi bi-person', label: 'Profil' },
-            ],
+            isAuthenticated: !!localStorage.getItem('uid'),
+            items: [],
             routes: []
         }
+    },
+
+    created() {
+        this.updateItems();
+
+        AuthEvent.$on('auth-changed', (auth) => {
+            this.isAuthenticated = auth;
+            this.updateItems();
+        });
     },
 
     mounted() {
@@ -63,6 +71,16 @@ export default {
             selector.style.left = offsetLeft + "px";
             selector.style.height = offsetHeight + "px";
             selector.style.width = offsetWidth + "px";
+        },
+
+        updateItems() {
+            this.items = [
+                { to: '/', icon: 'bi bi-house', label: 'Accueil' },
+                { to: '/databases', icon: 'bi bi-clipboard-data', label: 'Bases de données' },
+                this.isAuthenticated ?
+                    { to: '/profile', icon: 'bi bi-person', label: 'Profil' } :
+                    { to: '/login', icon: 'bi bi-person', label: 'Se connecter' },
+            ]
         }
     }
 }

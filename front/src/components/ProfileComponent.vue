@@ -1,7 +1,7 @@
 <template>
     <div>
         <AlertComponent :alert_type="alert.type" :message="alert.message" :show="alert.show" @close="closeAlert" />
-        <form @submit.prevent="submit()" class="card p-4 bg-create-an-account">
+        <form @submit.prevent="submit()">
             <fieldset>
                 <div class="row gx-3">
                     <div class="col-sm-6 mb-3">
