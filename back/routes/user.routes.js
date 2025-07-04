@@ -20,7 +20,7 @@ router.get("/getFields", controllers.getFields);
 
 /**
  * @swagger
- * /user/verify/{email}:
+ * /user/get_with_email/{email}:
  *   get:
  *      description: Use to verify user's email
  *      tags:
@@ -38,7 +38,7 @@ router.get("/getFields", controllers.getFields);
  *          "500":
  *              description: Internal server error
  */
-router.get("/verify/:email", controllers.getEmail);
+router.get("/get_with_email/:email", controllers.getEmail);
 
 /**
  * @swagger

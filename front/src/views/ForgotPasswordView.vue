@@ -73,7 +73,7 @@ export default {
 
     methods: {
         submit() {
-            axios.get(`http://localhost:${this.port}/user/verify/${this.email}`)
+            axios.get(`http://localhost:${this.port}/user/get_with_email/${this.email}`)
                 .then(() => {
                     sendPasswordResetEmail(auth, this.email);
                     this.alert.type = "alert-success";
