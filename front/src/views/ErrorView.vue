@@ -2,7 +2,12 @@
     <div class="bg-purple">
         <div class="stars">
             <div class="mx-auto central-body">
-                <img class="image-404 img-fluid" src="http://salehriaz.com/404Page/img/404.svg" width="350px">
+                <div class="d-flex flex-column">
+                    <img class="image-404 img-fluid" src="http://salehriaz.com/404Page/img/404.svg" width="350px">
+                    <button @click="$router.back()" type="button" class="btn fs-4 mt-4 text-white">
+                        <i class="bi bi-arrow-left-circle me-2"></i>Go back
+                    </button>
+                </div>
             </div>
             <div class="objects">
                 <img class="object_rocket" src="http://salehriaz.com/404Page/img/rocket.svg" width="40px">
