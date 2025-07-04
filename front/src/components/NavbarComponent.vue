@@ -1,6 +1,7 @@
 <template>
-    <nav class="navbar m-0 p-0" style="background: #65558F;"> <!-- TODO color utils -->
-        <router-link to="/" class="text-white text-decoration-none ps-2">SQLearning</router-link>
+    <nav v-if="routes.includes($route.path)" class="navbar m-0 p-0" style="background: #65558F;">
+        <!-- TODO color utils -->
+        <router-link to="/" class="fw-bold text-white text-decoration-none ps-2">SQLearning</router-link>
 
         <div id="id_navbar" class="position-relative">
             <div class="horizontal_selector position-absolute" ref="horizontal_selector">
@@ -27,11 +28,14 @@ export default {
                 { to: '/', icon: 'bi bi-house', label: 'Accueil' },
                 { to: '/databases', icon: 'bi bi-clipboard-data', label: 'Bases de données' },
                 { to: '/profile', icon: 'bi bi-person', label: 'Profil' },
-            ]
+            ],
+            routes: []
         }
     },
 
     mounted() {
+        this.routes = this.items.map(item => item.to);
+
         this.$nextTick(() => this.moveSelector());
         window.addEventListener('resize', () => {
             setTimeout(() => { this.moveSelector(); }, 500);
