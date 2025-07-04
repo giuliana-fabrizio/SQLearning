@@ -1,5 +1,6 @@
 <template>
-    <nav :class="routes.includes($route.path) ? '' : 'd-none'" class="navbar m-0 p-0" style="background: #65558F;">
+    <nav :class="$route.path === '/login' ? 'd-none' : routes.includes($route.path) ? '' : 'd-none'"
+        class="navbar m-0 p-0" style="background: #65558F;">
         <!-- TODO color utils -->
         <router-link to="/" class="fw-bold text-white text-decoration-none ps-2">SQLearning</router-link>
 
@@ -64,13 +65,15 @@ export default {
 
             const elem_active = nav_items[activeIndex];
 
-            const { offsetTop, offsetLeft, offsetHeight, offsetWidth } = elem_active;
-            const selector = this.$refs.horizontal_selector;
+            if (elem_active) {
+                const { offsetTop, offsetLeft, offsetHeight, offsetWidth } = elem_active;
+                const selector = this.$refs.horizontal_selector;
 
-            selector.style.top = offsetTop + "px";
-            selector.style.left = offsetLeft + "px";
-            selector.style.height = offsetHeight + "px";
-            selector.style.width = offsetWidth + "px";
+                selector.style.top = offsetTop + "px";
+                selector.style.left = offsetLeft + "px";
+                selector.style.height = offsetHeight + "px";
+                selector.style.width = offsetWidth + "px";
+            }
         },
 
         updateItems() {
