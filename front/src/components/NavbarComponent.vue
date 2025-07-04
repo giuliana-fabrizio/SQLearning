@@ -1,5 +1,5 @@
 <template>
-    <nav v-if="routes.includes($route.path)" class="navbar m-0 p-0" style="background: #65558F;">
+    <nav :class="routes.includes($route.path) ? '' : 'd-none'" class="navbar m-0 p-0" style="background: #65558F;">
         <!-- TODO color utils -->
         <router-link to="/" class="fw-bold text-white text-decoration-none ps-2">SQLearning</router-link>
 
