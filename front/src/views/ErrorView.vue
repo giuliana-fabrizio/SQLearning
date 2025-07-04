@@ -40,7 +40,7 @@ export default {
 .bg-purple {
     background: url(http://salehriaz.com/404Page/img/bg_purple.png);
     height: 100vh;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .central-body {
