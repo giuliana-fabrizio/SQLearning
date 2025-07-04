@@ -27,29 +27,36 @@ router.get("/getFields", controllers.getFields);
  *          - USER
  *      parameters:
  *          - in: body
- *            name: User
+ *            name: user
  *            schema:
  *              type: object
- *              required: true
+ *              required:
+ *                - user
  *              properties:
- *                  firstname:
- *                      type: string
- *                      example: "Jeanne"
- *                  name:
- *                      type: string
- *                      example: "Dupon"
- *                  mail:
- *                      type: string
- *                      example: "jeanne.dupon@gmail.com"
- *                  avatar:
- *                      type: string
- *                      example: "avatar"
- *                  is_admin:
- *                      type: logical
- *                      example: false
- *                  id_field:
- *                      type: integer
- *                      example: 1
+ *                  user:
+ *                    type: object
+ *                    properties:
+ *                      id:
+ *                        type: string
+ *                        example: "mSc99LTgQdZnQoUwOwy"
+ *                      firstname:
+ *                        type: string
+ *                        example: "Jeanne"
+ *                      name:
+ *                        type: string
+ *                        example: "Dupon"
+ *                      mail:
+ *                        type: string
+ *                        example: "jeanne.dupon@gmail.com"
+ *                      avatar:
+ *                        type: string
+ *                        example: "avatar"
+ *                      is_admin:
+ *                        type: logical
+ *                        example: false
+ *                      id_field:
+ *                        type: integer
+ *                        example: 1
  *      responses:
  *          "200":
  *              description: User added successfully

@@ -36,11 +36,11 @@ export default {
                 this.message = "Les mots de passe ne correspondent pas.";
             } else {
                 createUserWithEmailAndPassword(auth, user_to_create.mail, user_to_create.password)
-                    .then(async (userCredential) => {
-                        // const user = userCredential.user; TODO
+                    .then(async (credential) => {
+                        // const user = credential.user; TODO
 
                         const port = process.env.VUE_APP_SERVER_PORT;
-                        await axios.post(`http://localhost:${port}/user/create`, { user: user_to_create })
+                        await axios.post(`http://localhost:${port}/user/create`, { user: { ...user_to_create, id: credential.user.uid } })
                             .then(() => {
                                 this.$router.push({ name: 'home' });
                             })

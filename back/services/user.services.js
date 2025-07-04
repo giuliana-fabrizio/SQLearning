@@ -21,6 +21,7 @@ const insert = (user, callback) => {
         }
 
         db.run(queries.insert, [
+            user.id,
             user.firstname,
             user.name,
             user.mail,
