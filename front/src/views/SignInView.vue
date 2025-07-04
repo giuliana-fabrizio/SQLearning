@@ -48,11 +48,13 @@
 </template>
 
 <script>
+import axios from "axios";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
 
 import { purple } from "@/utils/colors";
 import AlertComponent from "@/components/AlertComponent.vue";
+import { AuthEvent } from "@/utils/auth";
 
 export default {
     name: "CreateAnAccountView",
@@ -77,12 +79,28 @@ export default {
         purple
     }),
 
+    created() {
+        this.port = process.env.VUE_APP_SERVER_PORT;
+    },
+
     methods: {
         submit() {
             signInWithEmailAndPassword(auth, this.email, this.password)
-                .then((data) => {
+                .then((response_firebase) => {
                     this.closeAlert();
-                    // TODO session storage
+
+                    axios.get(`http://localhost:${this.port}/user/get_with_email/${this.email}`)
+                        .then(response => {
+                            localStorage.setItem('uid', response_firebase.user.uid);
+                            localStorage.setItem('role', response.data.data.is_admin);
+                            AuthEvent.$emit('auth-changed', true);
+                            this.$router.push({ name: 'home' });
+                        })
+                        .catch(_ => {
+                            this.alert.type = "alert-danger";
+                            this.alert.message = 'Erreur inconnu'
+                            this.alert.show = true;
+                        });
                 })
                 .catch(() => {
                     this.alert.type = "alert-danger";

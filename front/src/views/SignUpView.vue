@@ -53,12 +53,10 @@ export default {
                 this.message = "Les mots de passe ne correspondent pas.";
             } else {
                 createUserWithEmailAndPassword(auth, user_to_create.mail, user_to_create.password)
-                    .then(async (credential) => {
-                        // const user = credential.user; TODO
-
-                        await axios.post(`http://localhost:${this.port}/user/create`, { user: { ...user_to_create, id: credential.user.uid } })
+                    .then((credential) => {
+                        axios.post(`http://localhost:${this.port}/user/create`, { user: { ...user_to_create, id: credential.user.uid } })
                             .then(() => {
-                                this.$router.push({ name: 'home' });
+                                this.$router.push({ name: 'login' });
                             })
                             .catch((error) => {
                                 error = error.response.data.data;

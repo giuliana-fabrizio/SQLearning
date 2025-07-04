@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/login", // TODO
+        path: "/login",
         name: "login",
         component: SignInView
     }, {
@@ -30,17 +30,5 @@ const routes = [
 const router = new VueRouter({
     routes
 });
-
-// router.beforeEach(async (to, from) => {
-//     if (
-//         // make sure the user is authenticated
-//         !isAuthenticated &&
-//         // ❗️ Avoid an infinite redirect
-//         to.name !== 'Login'
-//     ) {
-//         // redirect the user to the login page
-//         return { name: 'login' }
-//     }
-// })
 
 export default router;
