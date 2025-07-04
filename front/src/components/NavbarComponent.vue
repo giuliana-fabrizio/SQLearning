@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #id_navbar {
     overflow: hidden;
 }

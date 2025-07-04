@@ -7,14 +7,18 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/',
-        name: 'home',
+        path: "/",
+        name: "home",
         component: HomeView
+    }, {
+        path: "/register",
+        name: "register",
+        component: () => import("../views/CreateAnAccountView.vue")
     }, {
         path: '*',
         name: 'error',
         component: ErrorView
-    }
+    },
 ];
 
 const router = new VueRouter({

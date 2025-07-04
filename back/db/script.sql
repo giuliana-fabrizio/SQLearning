@@ -15,7 +15,6 @@ CREATE TABLE USER(
     firstname VARCHAR(50),
     name VARCHAR(50),
     mail VARCHAR(50),
-    password VARCHAR(20),
     avatar VARCHAR(50),
     is_admin LOGICAL,
     id_field INTEGER NOT NULL,

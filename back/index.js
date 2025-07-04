@@ -1,7 +1,11 @@
-const dotenv = require('dotenv');
-const express = require('express');
+const cors = require("cors");
+const dotenv = require("dotenv");
+const express = require("express");
+
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
+
+const user_routers = require("./routes/user.routes");
 
 // ======================================================================= Load environment variables
 
@@ -28,7 +32,18 @@ const swaggerDocs = swaggerJsdoc(swaggerOption);
 
 const app = express();
 
+const corsOptions = {
+    credentials: true,
+    optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
+app.use(express.json()); // middleware pour parser les requêtes avec un body JSON
+
+// ============================================== Routes
+
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use("/user", user_routers);
 
 app.listen(port, () => {
     console.log(`Server is listenning on ${port} port.`);
