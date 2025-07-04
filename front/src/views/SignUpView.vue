@@ -6,7 +6,15 @@
         <div class="d-flex justify-content-center position-relative pt-4">
             <div class="col-10 col-sm-8 col-md-6 col-lg-4 mt-5 mb-5">
                 <h2 class="mb-5 text-center text-white">SQLEARNING</h2>
-                <ProfileComponent :submit_message="message" @submit="submit" @reset_message="reset_message" />
+                <div class="card p-4 bg-create-an-account">
+                    <ProfileComponent :submit_message="message" @submit="submit" @reset_message="reset_message" />
+
+                    <div class="d-flex align-items-center justify-content-center mt-3 auth-actions">
+                        <p class="m-0 me-3">Déjà inscrit ?</p>
+                        <router-link to="/login" class="fw-bolder text-decoration-none"
+                            :style="{ color: purple.color_8 }">Connectez-vous !</router-link>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -17,6 +25,7 @@ import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
+import { purple } from "@/utils/colors";
 import ProfileComponent from "@/components/ProfileComponent.vue";
 
 export default {
@@ -28,6 +37,8 @@ export default {
 
     data: () => ({
         message: "",
+
+        purple
     }),
 
     methods: {

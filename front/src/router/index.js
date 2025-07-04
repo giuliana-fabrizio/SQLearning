@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/l", // TODO
+        path: "/login", // TODO
         name: "login",
         component: SignInView
     }, {
