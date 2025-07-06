@@ -2,7 +2,7 @@
     <div :style="{ background: purple.color_1 }">
         <div class="p-3 row">
             <div class="col-sm-3 col-md-2 col-lg-1 d-none d-sm-block">
-                <img :src="require(`@/assets/${data.avatar}`)" alt="Image" class="w-100">
+                <!-- <img :src="'../../public/image/avatars'" alt="Image" class="w-100"> --> TODO
             </div>
             <div class="col-8 col-md-9 col-lg-10">
                 <p class="fs-5 mb-1">{{ data.name }}</p>

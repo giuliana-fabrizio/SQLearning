@@ -32,6 +32,10 @@
         <div v-for="(data, index) in filtered_databases" :key="index">
             <CardDatabaseComponent :data="data" />
         </div>
+        <div v-if="filtered_databases.length === 0" class="mt-5">
+            <p class="fw-bold text-center">Aucun résultat</p>
+            <p>Modifiez ou supprimez certains de vos filtres</p>
+        </div>
     </div>
 </template>
 

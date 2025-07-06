@@ -1,10 +1,12 @@
 const cors = require("cors");
-const dotenv = require('dotenv');
-const express = require('express');
+const dotenv = require("dotenv");
+const express = require("express");
+
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
 const db_routers = require("./routes/db.routes");
+const user_routers = require("./routes/user.routes");
 
 // ======================================================================= Load environment variables
 
@@ -37,11 +39,13 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions));
+app.use(express.json()); // middleware pour parser les requêtes avec un body JSON
 
 // ============================================== Routes
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use("/database", db_routers);
+app.use("/user", user_routers);
 
 app.listen(port, () => {
     console.log(`Server is listenning on ${port} port.`);

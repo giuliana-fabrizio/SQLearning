@@ -1,29 +1,42 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 import ListDatabasesView from '@/views/ListDatabasesView.vue';
+
+import SignInView from '@/views/SignInView.vue';
+import SignUpView from '@/views/SignUpView.vue';
+import ForgotPasswordView from '@/views/ForgotPasswordView.vue';
+
+import ErrorView from '@/views/ErrorView.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
+    /** ============================================== Authentication */
     {
-        path: '/',
-        name: 'home',
-        component: HomeView
+        path: "/login",
+        name: "login",
+        component: SignInView
+    }, {
+        path: "/reset_password",
+        name: "reset_password",
+        component: ForgotPasswordView
+    }, {
+        path: "/register",
+        name: "register",
+        component: SignUpView
     },
+    /** ============================================== Databases */
     {
         path: '/databases',
         name: 'databases',
         component: ListDatabasesView
     },
+    /** ============================================== Error */
     {
-        path: '/about',
-        name: 'about',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-    }
+        path: '*',
+        name: 'error',
+        component: ErrorView
+    },
 ];
 
 const router = new VueRouter({

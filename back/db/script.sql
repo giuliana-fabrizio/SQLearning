@@ -11,11 +11,10 @@ CREATE TABLE FIELD(
 );
 
 CREATE TABLE USER(
-    id INTEGER CONSTRAINT pk_user PRIMARY KEY AUTOINCREMENT,
+    id VARCHAR(30) CONSTRAINT pk_user PRIMARY KEY,
     firstname VARCHAR(50),
     name VARCHAR(50),
     mail VARCHAR(50),
-    password VARCHAR(20),
     avatar VARCHAR(50),
     is_admin LOGICAL,
     id_field INTEGER NOT NULL,
