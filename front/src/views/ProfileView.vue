@@ -2,7 +2,8 @@
     <div class="d-flex justify-content-center pt-4">
         <div class="col-10 col-sm-8 col-md-6 mt-5 mb-5">
             <!-- <h2 class="fw-bold mb-5 text-center" :style="{ color: purple.color_11 }">Mon profil</h2> -->
-            <img v-if="current_user.avatar" :src="'../../public/images/avatars/' + current_user.avatar + '.png'" class="mb-5 img-remove-avatar">
+            <img v-if="current_user.avatar" :src="'../../public/images/avatars/' + current_user.avatar + '.png'"
+                class="mb-5 img-remove-avatar">
             <i v-else class="bi bi-person mb-5 icon-avatar"></i>
 
             <ProfileComponent :user="current_user" :submit_message="message" @submit="submit"

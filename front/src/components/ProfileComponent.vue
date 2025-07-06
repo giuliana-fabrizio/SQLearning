@@ -49,13 +49,7 @@
                     </div>
                 </div>
 
-                <div v-if="user" class="mb-3">
-                    <button type="button" data-bs-toggle="collapse" href="#id_collapse_avatar" class="btn"
-                        :style="{ background: purple.color_4 }">
-                        Changer votre avatar
-                    </button>
-                    <AvatarsComponent :avatar="user_property.avatar" @resetAvatar="resetAvatar" />
-                </div>
+                <AvatarsComponent v-if="user" class="mb-3" :avatar="user_property.avatar" @resetAvatar="resetAvatar" />
 
                 <button type="submit" class="btn mt-3 text-white w-100" :style="{ background: purple.color_11 }">
                     Valider
@@ -127,7 +121,7 @@ export default {
 
     watch: {
         user: function (user, _) {
-            this.user_property = user;
+            this.user_property = { ...user };
         },
 
         submit_message: function (message, _) {
