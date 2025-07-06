@@ -1,20 +1,48 @@
 /* ============================================================================ authentification */
 
-.img-create-an-account {
+.img-auth {
     left: 0;
     height: 100vh !important;
     object-fit: cover !important;
 }
 
-.bg-create-an-account,
-.bg-create-an-account:focus,
-.bg-create-an-account:-webkit-autofill {
-    border: #ccc !important;
+.bg-form-auth,
+:-webkit-autofill {
+    border: none !important;
+    -webkit-box-shadow: 0 0 0px 1000px #ccc inset !important;
+}
+
+.bg-input-auth,
+.bg-input-auth:focus,
+.bg-input-auth:-webkit-autofill {
+    border: none !important;
     border-bottom: 2px solid #49454F !important;
     -webkit-box-shadow: 0 0 0px 1000px #ccc inset !important;
 }
 
-
 .auth-actions {
     font-size: 15px;
+}
+
+
+/* ============================================================================ profile */
+
+.icon-avatar {
+    font-size: 80px;
+    height: 80px;
+}
+
+.img-avatar,
+.img-remove-avatar {
+    width: 50px !important;
+}
+
+.img-avatar:hover,
+.img-remove-avatar:hover {
+    cursor: pointer;
+}
+
+.img-avatar-selected {
+    border: 4px solid;
+    border-radius: 50%;
 }

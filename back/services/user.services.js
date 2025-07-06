@@ -18,7 +18,20 @@ const getEmail = (email, callback) => {
         return callback({
             code: "EMAIL_NOT_FOUND",
             message: "Erreur: adresse e-mail non trouvée.",
-            details: "Veuillez saisir une adresse e-mail valide ou créer un compte.."
+            details: "Veuillez saisir une adresse e-mail valide ou créer un compte."
+        })
+    });
+}
+
+const getUser = (id, callback) => {
+    db.get(queries.getUser, [id], (_, res) => {
+        if (res) {
+            return callback(null, res);
+        }
+        return callback({
+            code: "USER_NOT_FOUND",
+            message: "Erreur: utilisateur non trouvé.",
+            details: "Veuillez saisir un identifiant valide."
         })
     });
 }
@@ -53,5 +66,6 @@ const insert = (user, callback) => {
 module.exports = {
     getFields: getFields,
     getEmail: getEmail,
+    getUser: getUser,
     insert: insert
 }

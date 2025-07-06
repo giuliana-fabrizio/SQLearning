@@ -4,10 +4,12 @@ import ErrorView from '@/views/ErrorView.vue';
 import SignInView from '@/views/SignInView.vue';
 import SignUpView from '@/views/SignUpView.vue';
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue';
+import ProfileView from '@/views/ProfileView.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
+    /** ============================================== Authentication */
     {
         path: "/login",
         name: "login",
@@ -20,7 +22,15 @@ const routes = [
         path: "/register",
         name: "register",
         component: SignUpView
-    }, {
+    },
+    /** ============================================== Profile */
+    {
+        path: '/profile',
+        name: 'profile',
+        component: ProfileView
+    },
+    /** ============================================== Error */
+    {
         path: '*',
         name: 'error',
         component: ErrorView

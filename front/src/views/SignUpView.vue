@@ -1,19 +1,22 @@
 <template>
     <div>
         <img alt="background" src="../../public/images/background.png"
-            class="img-fluid position-fixed w-100 img-create-an-account">
+            class="img-fluid position-fixed w-100 img-auth">
 
         <div class="d-flex justify-content-center position-relative pt-4">
             <div class="col-10 col-sm-8 col-md-6 col-lg-4 mt-5 mb-5">
                 <h2 class="mb-5 text-center text-white">SQLEARNING</h2>
 
-                <div class="card p-4 bg-create-an-account">
-                    <ProfileComponent :submit_message="message" @submit="submit" @reset_message="reset_message" />
+                <div>
+                    <ProfileComponent :submit_message="message" @submit="submit" @reset_message="reset_message"
+                        form_class="bg-form-auth" input_class="bg-input-auth" />
 
-                    <div class="d-flex align-items-center justify-content-center mt-3">
-                        <p class="m-0 me-3">Déjà inscrit ?</p>
-                        <router-link to="/login" class="fw-bolder text-decoration-none"
-                            :style="{ color: purple.color_8 }">Connectez-vous !</router-link>
+                    <div class="card rounded-0 rounded-bottom pb-4 bg-form-auth">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <p class="m-0 me-3">Déjà inscrit ?</p>
+                            <router-link to="/login" class="fw-bolder text-decoration-none"
+                                :style="{ color: purple.color_8 }">Connectez-vous !</router-link>
+                        </div>
                     </div>
                 </div>
             </div>

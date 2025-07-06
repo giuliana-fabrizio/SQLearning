@@ -42,6 +42,28 @@ router.get("/get_with_email/:email", controllers.getEmail);
 
 /**
  * @swagger
+ * /user/{id}:
+ *   get:
+ *      description: Use to get an user by his uid
+ *      tags:
+ *          - USER
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            type: string
+ *            required: true
+ *      responses:
+ *          "200":
+ *              description: User gotten successfully
+ *          "404":
+ *              description: User not found
+ *          "500":
+ *              description: Internal server error
+ */
+router.get("/:id", controllers.getUser);
+
+/**
+ * @swagger
  * /user/create:
  *   post:
  *      description: Use to register a user

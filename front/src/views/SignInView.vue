@@ -1,7 +1,7 @@
 <template>
     <div>
         <img alt="background" src="../../public/images/background.png"
-            class="img-fluid position-fixed w-100 img-create-an-account">
+            class="img-fluid position-fixed w-100 img-auth">
 
         <div class="d-flex justify-content-center position-relative pt-4">
             <div class="col-10 col-sm-8 col-md-6 col-lg-4 mt-5 mb-5">
@@ -9,19 +9,19 @@
                 <AlertComponent :alert_type="alert.type" :message="alert.message" :show="alert.show"
                     @close="closeAlert" />
 
-                <div class="card p-4 bg-create-an-account">
+                <div class="card p-4 bg-form-auth">
                     <form @submit.prevent="submit()">
                         <fieldset>
                             <div class="mb-3">
                                 <label for="mail" class="fw-bolder ps-0">Adresse mail</label>
                                 <input id="mail" type="email" v-model="email"
-                                    class="form-control text-center rounded-0 bg-create-an-account" required>
+                                    class="form-control text-center rounded-0 bg-input-auth" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="password" class="fw-bolder ps-0">Mot de passe</label>
                                 <input id="password" type="password" minlength="8" v-model="password"
-                                    class="form-control text-center rounded-0 bg-create-an-account" required>
+                                    class="form-control text-center rounded-0 bg-input-auth" required>
                             </div>
 
                             <div class="text-end">
@@ -29,7 +29,7 @@
                                     :style="{ color: purple.color_8 }">Mot de passe oublié ?</router-link>
                             </div>
 
-                            <button type="submit" class="btn btn-submit mt-3 text-white w-100"
+                            <button type="submit" class="btn  mt-3 text-white w-100"
                                 :style="{ background: purple.color_11 }">
                                 Valider
                             </button>

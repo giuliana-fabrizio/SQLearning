@@ -19,6 +19,16 @@ const getEmail = (req, res) => {
     });
 }
 
+const getUser = (req, res) => {
+    const id = req.params.id;
+    services.getUser(id, (error, data) => {
+        if (error) {
+            return res.status(404).send({ success: 0, data: error });
+        }
+        return res.status(200).send({ success: 1, data: data });
+    });
+}
+
 const insert = (req, res) => {
     services.insert(req.body.user, (error, data) => {
         if (error) {
@@ -34,5 +44,6 @@ const insert = (req, res) => {
 module.exports = {
     getFields: getFields,
     getEmail: getEmail,
+    getUser: getUser,
     insert: insert
 }

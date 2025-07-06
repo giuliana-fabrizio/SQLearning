@@ -1,26 +1,26 @@
 <template>
     <div>
         <AlertComponent :alert_type="alert.type" :message="alert.message" :show="alert.show" @close="closeAlert" />
-        <form @submit.prevent="submit()">
+        <form @submit.prevent="submit()" class="card rounded-0 rounded-top p-4" :class="form_class">
             <fieldset>
                 <div class="row gx-3">
                     <div class="col-sm-6 mb-3">
                         <label for="firstname" class="fw-bolder ps-0">Prénom</label>
                         <input id="firstname" type="text" v-model="user_property.firstname"
-                            class="form-control text-center rounded-0 bg-create-an-account" required>
+                            class="form-control text-center rounded-0" :class="input_class" required>
                     </div>
 
                     <div class="col-sm-6 mb-3">
                         <label for="name" class="fw-bolder ps-0">Nom</label>
                         <input id="name" type="text" v-model="user_property.name"
-                            class="form-control text-center rounded-0 bg-create-an-account" required>
+                            class="form-control text-center rounded-0" :class="input_class" required>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="field" class="fw-bolder ps-0">Secteur d'activité</label>
-                    <select id="field" v-model="user_property.id_field"
-                        class="form-control rounded-0 bg-create-an-account" required>
+                    <select id="field" v-model="user_property.id_field" class="form-control rounded-0"
+                        :class="input_class" required>
                         <option value="" disabled>Choisir...</option>
                         <option v-for="(field, index) in fields" :key="index" :value="field.id">
                             {{ field.name }}
@@ -31,32 +31,33 @@
                 <div class="mb-3">
                     <label for="mail" class="fw-bolder ps-0">Email</label>
                     <input id="mail" type="email" v-model="user_property.mail"
-                        class="form-control text-center rounded-0 bg-create-an-account" required :disabled="user">
+                        class="form-control text-center rounded-0" :class="input_class" required :disabled="user">
                 </div>
 
                 <div class="row gx-3">
                     <div class="col-sm-6 mb-3">
                         <label for="password" class="fw-bolder ps-0">Mot de passe</label>
                         <input @change="verifyPassword" id="password" type="password" minlength="8"
-                            v-model="user_property.password"
-                            class="form-control text-center rounded-0 bg-create-an-account" required>
+                            v-model="user_property.password" class="form-control text-center rounded-0"
+                            :class="input_class" :required="!user">
                     </div>
 
                     <div class="col-sm-6 mb-3">
                         <label for="check_password" class="fw-bolder ps-0">Confirmer</label>
                         <input id="check_password" type="password" minlength="8" v-model="user_property.check_password"
-                            class="form-control text-center rounded-0 bg-create-an-account" required>
+                            class="form-control text-center rounded-0" :class="input_class" :required="!user">
                     </div>
                 </div>
 
                 <div v-if="user" class="mb-3">
-                    <label for="avatar" class="fw-bolder ps-0">Avatar</label>
-                    <input id="avatar" type="text" v-model="user_property.avatar"
-                        class="form-control text-center rounded-0 bg-create-an-account">
+                    <button type="button" data-bs-toggle="collapse" href="#id_collapse_avatar" class="btn"
+                        :style="{ background: purple.color_4 }">
+                        Changer votre avatar
+                    </button>
+                    <AvatarsComponent :avatar="user_property.avatar" @resetAvatar="resetAvatar" />
                 </div>
 
-                <button type="submit" class="btn btn-submit mt-3 text-white w-100"
-                    :style="{ background: purple.color_11 }">
+                <button type="submit" class="btn mt-3 text-white w-100" :style="{ background: purple.color_11 }">
                     Valider
                 </button>
             </fieldset>
@@ -69,19 +70,23 @@ import axios from "axios";
 
 import { purple } from "@/utils/colors";
 import AlertComponent from "./AlertComponent.vue";
+import AvatarsComponent from "./AvatarsComponent.vue";
 
 export default {
     name: "ProfileComponent",
 
     components: {
-        AlertComponent
+        AlertComponent,
+        AvatarsComponent
     },
 
     data: () => ({
         fields: [],
         port: 0,
+        show_avatars: false,
 
         user_property: {
+            id: "",
             avatar: "",
             firstname: "",
             name: "",
@@ -96,7 +101,7 @@ export default {
             message: "",
             show: false
         },
-        isUserGood: false,
+        isUserGood: true,
 
         purple
     }),
@@ -104,7 +109,9 @@ export default {
     props: {
         user: Object,
         submit_message: String,
-        reset_message: String
+        reset_message: String,
+        form_class: String,
+        input_class: String
     },
 
     created() {
@@ -119,6 +126,10 @@ export default {
     },
 
     watch: {
+        user: function (user, _) {
+            this.user_property = user;
+        },
+
         submit_message: function (message, _) {
             if (message != "") {
                 this.alert.type = "alert-danger";
@@ -150,6 +161,10 @@ export default {
             } else {
                 this.isUserGood = true;
             }
+        },
+
+        resetAvatar(avatar) {
+            this.user_property.avatar = avatar;
         },
 
         closeAlert() {
