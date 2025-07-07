@@ -5,7 +5,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /database/get:
+ * /database:
  *   get:
  *      description: Use to list all databases
  *      tags:
@@ -16,6 +16,6 @@ const router = express.Router();
  *          "500":
  *              description: Internal server error
  */
-router.get("/get", controllers.getDatabases);
+router.get("/", controllers.getDatabases);
 
 module.exports = router;
