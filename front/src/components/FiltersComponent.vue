@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div v-if="filters_db.id_user != null" class="mb-3">
                 <p class="fw-bold mb-2">Statut de votre travail</p>
 
                 <div class="form-check mb-1">
@@ -76,7 +76,8 @@ export default {
         filters_db: {
             min_people: undefined,
             max_people: undefined,
-            work_status: undefined // true if beginning ; false else
+            work_status: undefined, // true if beginning ; false else
+            id_user: localStorage.getItem('uid')
         },
 
         modalStyle: {

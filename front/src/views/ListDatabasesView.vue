@@ -55,6 +55,7 @@ export default {
         display_filter: false,
         port: 0,
         search_name: "",
+        filters: {},
 
         purple
     }),
@@ -83,7 +84,7 @@ export default {
         applyFilters(filters) {
             this.filters = JSON.parse(JSON.stringify(filters));
 
-            axios.get(`http://localhost:${this.port}/database/get?min_people=${this.filters.min_people}&max_people=${this.filters.max_people}&work_status=${this.filters.work_status}`)
+            axios.get(`http://localhost:${this.port}/database/get?min_people=${this.filters.min_people}&max_people=${this.filters.max_people}&work_status=${this.filters.work_status}&id_user=${this.filters.id_user}`)
                 .then(res => {
                     this.databases = res.data.data;
                     this.filtered_databases = this.databases;
