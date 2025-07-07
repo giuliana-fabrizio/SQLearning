@@ -28,6 +28,10 @@
     outline: none !important;
 }
 
+.badge-peoples {
+    margin-top: 3px;
+}
+
 color {
     color: #FEF5FF; /* 1 */
     color: #FEF7FF; /* 2 */
