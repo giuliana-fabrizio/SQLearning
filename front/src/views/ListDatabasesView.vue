@@ -82,7 +82,10 @@ export default {
             this.filtered_databases = this.databases.filter(db => db.name.toLowerCase().includes(e.target.value.toLowerCase()));
         },
 
-        getFiltersFromURL() { this.filters = this.$route.query; },
+        getFiltersFromURL() {
+            this.filters = this.$route.query;
+            this.filters.work_status = Boolean(this.filters.work_status)
+        },
 
         pushFiltersInURL() {
             const queries = {};
