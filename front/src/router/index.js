@@ -41,4 +41,17 @@ const router = new VueRouter({
     routes
 });
 
+router.beforeEach((to, _, next) => {
+    const uid = localStorage.getItem("uid") ? true : false;
+
+    if (to.name === "profile" && !uid) {
+        next('/');
+    }
+
+    if ((to.name === "login" || to.name === "reset_password" || to.name === "register") && uid) {
+        next('/');
+    }
+    next();
+})
+
 export default router;
