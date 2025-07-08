@@ -150,8 +150,8 @@ export default {
         logout() {
             localStorage.removeItem('uid');
             localStorage.removeItem('role');
-            AuthEvent.$emit('auth-changed', true);
-            this.$router.push({ name: 'login' });
+            AuthEvent.$emit('auth-changed', false);
+            this.$router.push({ name: 'home' });
         },
 
         cancelPassword() {
