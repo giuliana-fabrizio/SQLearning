@@ -47,3 +47,75 @@
     border: 4px solid;
     border-radius: 50%;
 }
+
+
+/* ============================================================================ navbar */
+
+#id_navbar {
+    overflow: hidden;
+}
+
+#id_navbar li {
+    list-style-type: none;
+    float: left;
+}
+
+#id_navbar ul li a {
+    font-size: 15px;
+    padding: 20px 20px;
+    transition-duration: 0.6s;
+}
+
+#id_navbar>ul>li.active>a {
+    color: #65558F !important;
+    background-color: transparent;
+    transition: all 0.7s;
+}
+
+.horizontal_selector {
+    top: 0px;
+    left: 0px;
+    transition-duration: 0.6s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-top: 12px;
+}
+
+.horizontal_selector .right,
+.horizontal_selector .left {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    bottom: 10px;
+}
+
+.horizontal_selector .right {
+    right: -25px;
+}
+
+.horizontal_selector .left {
+    left: -25px;
+}
+
+.horizontal_selector .right:before,
+.horizontal_selector .left:before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #65558F;
+}
+
+.horizontal_selector .right:before {
+    bottom: 0;
+    right: -25px;
+}
+
+.horizontal_selector .left:before {
+    bottom: 0;
+    left: -25px;
+}
