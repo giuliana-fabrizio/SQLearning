@@ -66,24 +66,6 @@ export default {
                 "--transform-arm2": "rotate(-45deg)", "--transform-wrist2": "rotate(6deg)",
                 "--transform-leg1": "rotate(-5deg)", "--transform-calf1": "rotate(10deg)",
                 "--transform-leg2": "rotate(10deg)", "--transform-calf2": "rotate(-20deg)"
-            },
-            falling1: {
-                "--figure-duration": "1600", "--walking-duration": "400", "--transform-arm1": "rotate(-60deg)",
-                "--transform-wrist1": "none", "--transform-arm2": "rotate(30deg)",
-                "--transform-wrist2": "rotate(120deg)", "--transform-leg1": "rotate(-30deg)",
-                "--transform-calf1": "rotate(-20deg)", "--transform-leg2": "rotate(20deg)"
-            },
-            falling2: {
-                "--walking-duration": "300", "--transform-arm1": "rotate(-100deg)",
-                "--transform-arm2": "rotate(-60deg)", "--transform-wrist2": "rotate(60deg)",
-                "--transform-leg1": "rotate(80deg)", "--transform-calf1": "rotate(20deg)",
-                "--transform-leg2": "rotate(-60deg)"
-            },
-            falling3: {
-                "--walking-duration": "500", "--transform-arm1": "rotate(-30deg)",
-                "--transform-wrist1": "rotate(40deg)", "--transform-arm2": "rotate(50deg)",
-                "--transform-wrist2": "none", "--transform-leg1": "rotate(-30deg)",
-                "--transform-leg2": "rotate(20deg)", "--transform-calf2": "none"
             }
         }
     }),
@@ -118,13 +100,6 @@ export default {
             await this.wait(Number(this.button_state["walking2"]["--figure-duration"]));
 
             this.button.classList.add("falling");
-            this.updateButtonState(this.button, "falling1");
-            await this.wait(Number(this.button_state["falling1"]["--walking-duration"]));
-
-            this.updateButtonState(this.button, "falling2");
-            await this.wait(Number(this.button_state["falling2"]["--walking-duration"]));
-
-            this.updateButtonState(this.button, "falling3");
             await this.wait(1000);
 
             this.button.classList.remove("clicked", "door-slammed", "falling");
@@ -149,17 +124,6 @@ export default {
 
 <style scoped>
 .btn {
-    --figure-duration: 100ms;
-    --transform-figure: none;
-    --walking-duration: 100ms;
-    --transform-arm1: none;
-    --transform-wrist1: none;
-    --transform-arm2: none;
-    --transform-wrist2: none;
-    --transform-leg1: none;
-    --transform-calf1: none;
-    --transform-leg2: none;
-    --transform-calf2: none;
     border: 0;
     cursor: pointer;
     display: block;
@@ -182,18 +146,6 @@ export default {
     z-index: 2;
 }
 
-.btn:hover .door {
-    transform: rotateY(20deg);
-}
-
-.btn:active::before {
-    transform: scale(0.96);
-}
-
-.btn:active .door {
-    transform: rotateY(28deg);
-}
-
 .btn.clicked .door {
     transform: rotateY(35deg);
 }
@@ -209,14 +161,6 @@ export default {
 
 .btn.falling .bang {
     animation: flash 300ms linear;
-}
-
-.btn.falling .figure {
-    animation: spin 1000ms infinite linear;
-    bottom: -1080px;
-    right: 1px;
-    transition: transform calc(var(--figure-duration) * 1ms) linear, bottom calc(var(--figure-duration) * 1ms) cubic-bezier(0.7, 0.1, 1, 1) 100ms, opacity calc(var(--figure-duration) * 0.25ms) linear calc(var(--figure-duration) * 0.75ms);
-    z-index: 1;
 }
 
 .button-text {
@@ -313,16 +257,6 @@ export default {
 .calf2 {
     transform: var(--transform-calf2);
     transform-origin: 41.5% 73%;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg) scale(0.94);
-    }
-
-    to {
-        transform: rotate(359deg) scale(0.94);
-    }
 }
 
 @keyframes shake {
