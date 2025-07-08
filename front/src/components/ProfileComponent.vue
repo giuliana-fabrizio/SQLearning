@@ -122,7 +122,7 @@ export default {
         },
 
         verifyPassword() {
-            const regex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#@$%&? "]).*$/;
+            const regex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*\d)(?=.*[!#@$%&? "]).*$/;
 
             if (this.user_values.password === '') {
                 this.isUserGood = true;

@@ -5,6 +5,7 @@ const express = require("express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
+const db_routers = require("./routes/db.routes");
 const user_routers = require("./routes/user.routes");
 
 // ======================================================================= Load environment variables
@@ -43,6 +44,7 @@ app.use(express.json()); // middleware pour parser les requêtes avec un body JS
 // ============================================== Routes
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use("/database", db_routers);
 app.use("/user", user_routers);
 
 app.listen(port, () => {

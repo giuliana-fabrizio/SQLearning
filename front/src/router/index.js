@@ -1,10 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import ErrorView from '@/views/ErrorView.vue';
+import ListDatabasesView from '@/views/ListDatabasesView.vue';
+
 import SignInView from '@/views/SignInView.vue';
 import SignUpView from '@/views/SignUpView.vue';
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue';
 import ProfileView from '@/views/ProfileView.vue';
+
+import ErrorView from '@/views/ErrorView.vue';
 
 Vue.use(VueRouter);
 
@@ -28,6 +31,12 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: ProfileView
+    },
+    /** ============================================== Databases */
+    {
+        path: '/databases',
+        name: 'databases',
+        component: ListDatabasesView
     },
     /** ============================================== Error */
     {
