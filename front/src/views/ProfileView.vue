@@ -1,29 +1,36 @@
 <template>
-    <div class="d-flex justify-content-center pt-4">
-        <div class="col-10 col-sm-8 col-md-6 mt-5 mb-5">
-            <AlertComponent :alert_type="alert.type" :message="alert.message" :show="alert.show" @close="closeAlert" />
+    <div class="mt-5 mb-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-10 col-sm-8 col-md-6">
+                <AlertComponent :alert_type="alert.type" :message="alert.message" :show="alert.show"
+                    @close="closeAlert" />
 
-            <Modal v-model="modal_psd.display" title="Confirmer votre mot de passe actuel" :modalStyle="modal_psd.style"
-                class="p-3">
+                <Modal v-model="modal_psd.display" title="Confirmer votre mot de passe actuel"
+                    :modalStyle="modal_psd.style" class="p-3">
 
-                <div class="mb-3">
-                    <label for="password" class="form-label">Mot de passe</label>
-                    <input id="password" type="password" minlength="8" v-model="modal_psd.value" class="form-control">
-                </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input id="password" type="password" minlength="8" v-model="modal_psd.value"
+                            class="form-control">
+                    </div>
 
-                <div class="d-flex justify-content-end">
-                    <button @click="cancelPassword" class="btn me-2 pe-4 ps-4"
-                        :style="{ background: purple.color_4 }">Annuler</button>
-                    <button @click="changePassword" class="btn pe-4 ps-4 text-white"
-                        :style="{ background: purple.color_10 }">Valider</button>
-                </div>
-            </Modal>
+                    <div class="d-flex justify-content-end">
+                        <button @click="cancelPassword" class="btn me-2 pe-4 ps-4"
+                            :style="{ background: purple.color_4 }">Annuler</button>
+                        <button @click="changePassword" class="btn pe-4 ps-4 text-white"
+                            :style="{ background: purple.color_10 }">Valider</button>
+                    </div>
+                </Modal>
 
-            <!-- <h2 class="fw-bold mb-5 text-center" :style="{ color: purple.color_11 }">Mon profil</h2> -->
-            <img v-if="avatar" :src="avatar" class="mb-5 icon-avatar">
-            <i v-else class="bi bi-person mb-5 icon-avatar"></i>
+                <!-- <h2 class="fw-bold mb-5 text-center" :style="{ color: purple.color_11 }">Mon profil</h2> -->
+                <img v-if="avatar" :src="avatar" class="mb-5 icon-avatar">
+                <i v-else class="bi bi-person mb-5 icon-avatar"></i>
 
-            <ProfileComponent @alert="displayAlert" :current_user="current_user" @submit="submit" />
+                <ProfileComponent @alert="displayAlert" :current_user="current_user" @submit="submit" />
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+            <LogoutButtonComponent @logout="logout" />
         </div>
     </div>
 </template>
@@ -34,9 +41,11 @@ import { getAuth, updatePassword, EmailAuthProvider, reauthenticateWithCredentia
 import VueModal from '@kouts/vue-modal';
 import '@kouts/vue-modal/dist/vue-modal.css';
 
+import { AuthEvent } from '@/utils/auth';
 import { purple } from "@/utils/colors";
 import AlertComponent from "@/components/AlertComponent.vue";
 import ProfileComponent from "@/components/ProfileComponent.vue";
+import LogoutButtonComponent from '@/components/LogoutButtonComponent.vue';
 
 export default {
     name: "ProfileView",
@@ -44,7 +53,8 @@ export default {
     components: {
         AlertComponent,
         'Modal': VueModal,
-        ProfileComponent
+        ProfileComponent,
+        LogoutButtonComponent
     },
 
     data: () => ({
@@ -135,6 +145,13 @@ export default {
                 console.error(`Error update password : ${error}`);
                 this.updateAlert("alert-danger", "Échec dans la modification des champs (problème rencontré au niveau du mot de passe).", true)
             }
+        },
+
+        logout() {
+            localStorage.removeItem('uid');
+            localStorage.removeItem('role');
+            AuthEvent.$emit('auth-changed', false);
+            this.$router.push({ name: 'home' });
         },
 
         cancelPassword() {
