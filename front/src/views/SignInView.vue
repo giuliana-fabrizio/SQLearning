@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img alt="background" src="../../public/images/background.png"
+        <img alt="background" src="@/assets/background.png"
             class="img-fluid position-fixed w-100 img-auth">
 
         <div class="d-flex justify-content-center position-relative pt-4">
