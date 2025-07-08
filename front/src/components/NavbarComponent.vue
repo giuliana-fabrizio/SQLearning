@@ -119,7 +119,7 @@ export default {
     background-color: white;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 .horizontal_selector .right,

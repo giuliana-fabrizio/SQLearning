@@ -63,9 +63,36 @@ const insert = (user, callback) => {
     });
 }
 
+const update = (user, callback) => {
+    db.get(queries.getUser, [user.id], (_, res) => {
+        if (!res) {
+            return callback({
+                code: "USER_NOT_FOUND",
+                message: "Erreur: utilisateur non trouvé.",
+                details: "Veuillez saisir un identifiant valide."
+            });
+        }
+
+        db.run(queries.update, [
+            user.firstname,
+            user.name,
+            user.avatar,
+            user.is_admin,
+            user.id_field,
+            user.id
+        ], (error) => {
+            if (error) {
+                return callback(error);
+            }
+            return callback(null, "Champs modifié avec succès");
+        });
+    });
+}
+
 module.exports = {
     getFields: getFields,
     getEmail: getEmail,
     getUser: getUser,
-    insert: insert
+    insert: insert,
+    update: update
 }

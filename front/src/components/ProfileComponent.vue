@@ -103,7 +103,6 @@ export default {
     props: {
         user: Object,
         submit_message: String,
-        reset_message: String,
         form_class: String,
         input_class: String
     },
@@ -126,7 +125,7 @@ export default {
 
         submit_message: function (message, _) {
             if (message != "") {
-                this.alert.type = "alert-danger";
+                this.alert.type = message.includes("succès") ? "alert-success" : "alert-danger";
                 this.alert.message = message;
                 this.alert.show = true;
             }
@@ -137,6 +136,7 @@ export default {
         submit() {
             if (this.isUserGood) {
                 this.$emit('submit', this.user_property);
+                // document.getElementById("id_collapse_avatar")?.classList.remove("show"); // TODO fermer les avatars si on submit ?
             } else {
                 this.alert.show = true;
             }

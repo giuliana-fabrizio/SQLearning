@@ -64,9 +64,9 @@ router.get("/:id", controllers.getUser);
 
 /**
  * @swagger
- * /user/create:
+ * /user:
  *   post:
- *      description: Use to register a user
+ *      description: Use to register an user
  *      tags:
  *          - USER
  *      parameters:
@@ -94,7 +94,7 @@ router.get("/:id", controllers.getUser);
  *                        example: "jeanne.dupon@gmail.com"
  *                      avatar:
  *                        type: string
- *                        example: "avatar"
+ *                        example: "bear"
  *                      is_admin:
  *                        type: logical
  *                        example: false
@@ -107,6 +107,53 @@ router.get("/:id", controllers.getUser);
  *          "500":
  *              description: Internal server error
  */
-router.post("/create", controllers.insert);
+router.post("/", controllers.insert);
+
+/**
+ * @swagger
+ * /user:
+ *   put:
+ *      description: Use to update an user
+ *      tags:
+ *          - USER
+ *      parameters:
+ *          - in: body
+ *            name: user
+ *            schema:
+ *              type: object
+ *              required:
+ *                - user
+ *              properties:
+ *                  user:
+ *                    type: object
+ *                    properties:
+ *                      id:
+ *                        type: string
+ *                        example: "mSc99LTgQdZnQoUwOwy"
+ *                      firstname:
+ *                        type: string
+ *                        example: "Jeanne"
+ *                      name:
+ *                        type: string
+ *                        example: "Dupon"
+ *                      mail:
+ *                        type: string
+ *                        example: "jeanne.dupon@gmail.com"
+ *                      avatar:
+ *                        type: string
+ *                        example: "cat"
+ *                      is_admin:
+ *                        type: logical
+ *                        example: false
+ *                      id_field:
+ *                        type: integer
+ *                        example: 1
+ *      responses:
+ *          "200":
+ *              description: User added successfully
+ *          "500":
+ *              description: Internal server error
+ */
+router.put("/", controllers.update);
 
 module.exports = router;

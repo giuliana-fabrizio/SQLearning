@@ -9,9 +9,15 @@ const insert = "\
     values ($1, $2, $3, $4, $5, $6, $7);\
 ";
 
+const update = "\
+    update user set firstname = ?, name = ?, avatar = ?, is_admin = ?, id_field = ?\
+    where id like ?;\
+";
+
 module.exports = {
     getFields: getFields,
     mailFree: mailFree,
     getUser: getUser,
-    insert: insert
+    insert: insert,
+    update: update
 }
