@@ -125,13 +125,14 @@ export default {
             const auth = getAuth();
             const firebase_user = auth.currentUser;
             const credential = EmailAuthProvider.credential(this.current_user.mail, this.modal_psd.value);
+            this.modal_psd.value = null;
 
             try {
                 await reauthenticateWithCredential(firebase_user, credential);
                 await updatePassword(firebase_user, this.user_values.password);
                 this.updateUser(this.user_values);
             } catch (error) {
-                console.error(`Error update password : ${error}`)
+                console.error(`Error update password : ${error}`);
                 this.updateAlert("alert-danger", "Échec dans la modification des champs (problème rencontré au niveau du mot de passe).", true)
             }
         },

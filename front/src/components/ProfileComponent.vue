@@ -42,7 +42,6 @@
                     </div>
 
                     <div class="col-sm-6 mb-3">
-                        {{ user_values.password && user_values.password != '' }}
                         <label for="check_password" class="fw-bolder ps-0">Confirmer</label>
                         <input id="check_password" type="password" minlength="8" v-model="user_values.check_password"
                             class="form-control text-center rounded-0" :class="input_class"
