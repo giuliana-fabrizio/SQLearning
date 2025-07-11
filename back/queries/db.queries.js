@@ -5,6 +5,9 @@ const getDatabases = "\
     inner join user as u on u.id = d.id_user\
 ";
 
+const deleteDatabase = "delete from database where id = $1;";
+
 module.exports = {
-    getDatabases: getDatabases
+    getDatabases: getDatabases,
+    deleteDatabase: deleteDatabase
 }

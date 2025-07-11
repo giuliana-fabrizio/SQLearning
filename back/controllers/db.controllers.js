@@ -10,6 +10,16 @@ const getDatabases = (req, res) => {
     });
 }
 
+const deleteDatabase = (req, res) => {
+    services.deleteDatabase(req.params.id, (error, data) => {
+        if (error) {
+            return res.status(500).send({ success: 0, data: error });
+        }
+        return res.status(200).send({ success: 1, data: data });
+    });
+}
+
 module.exports = {
-    getDatabases: getDatabases
+    getDatabases: getDatabases,
+    deleteDatabase: deleteDatabase
 }

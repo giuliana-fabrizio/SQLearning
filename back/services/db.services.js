@@ -1,8 +1,9 @@
 const db = require("../db/connect");
-const queries = require("../queries/db.queries");
+const db_queries = require("../queries/db.queries");
+const question_queries = require("../queries/question.queries");
 
 const getDatabases = (filters, callback) => {
-    let query = queries.getDatabases;
+    let query = db_queries.getDatabases;
 
     const having = [];
     const params = [];
@@ -39,6 +40,21 @@ const getDatabases = (filters, callback) => {
     });
 }
 
+const deleteDatabase = async (id, callback) => {
+    db.run(question_queries.deleteQuestions, [id], (error) => {
+        if (error) {
+            return callback(error);
+        }
+        db.run(db_queries.deleteDatabase, [id], (err, res) => {
+            if (err) {
+                return callback(error);
+            }
+            return callback(null, res);
+        });
+    });
+}
+
 module.exports = {
-    getDatabases: getDatabases
+    getDatabases: getDatabases,
+    deleteDatabase: deleteDatabase
 }

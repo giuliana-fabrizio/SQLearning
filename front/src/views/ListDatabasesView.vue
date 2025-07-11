@@ -19,7 +19,7 @@
             </button>
         </div>
         <div v-for="(data, index) in filtered_databases" :key="index">
-            <CardDatabaseComponent :data="data" />
+            <CardDatabaseComponent :data="data" @getDatabases="getDatabases" />
         </div>
         <div v-if="filtered_databases.length === 0" class="mt-5">
             <p class="fw-bold text-center">Aucun résultat</p>

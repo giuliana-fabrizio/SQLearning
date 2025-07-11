@@ -18,4 +18,24 @@ const router = express.Router();
  */
 router.get("/", controllers.getDatabases);
 
+/**
+ * @swagger
+ * /database/{id}:
+ *   delete:
+ *      description: Use to delete a database
+ *      tags:
+ *          - DATABASE
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            type: string
+ *            required: true
+ *      responses:
+ *          "200":
+ *              description: Database deleted successfully
+ *          "500":
+ *              description: Internal server error
+ */
+router.delete("/:id", controllers.deleteDatabase);
+
 module.exports = router;
