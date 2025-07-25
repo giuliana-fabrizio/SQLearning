@@ -14,7 +14,7 @@ CREATE TABLE USER(
     id VARCHAR(30) CONSTRAINT pk_user PRIMARY KEY,
     firstname VARCHAR(50),
     name VARCHAR(50),
-    mail VARCHAR(50),
+    mail VARCHAR(50) UNIQUE,
     avatar VARCHAR(50),
     is_admin LOGICAL,
     id_field INTEGER NOT NULL,
@@ -23,9 +23,9 @@ CREATE TABLE USER(
 
 CREATE TABLE DATABASE(
     id INTEGER CONSTRAINT pk_database PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(50),
+    name VARCHAR(50) UNIQUE,
     description VARCHAR(200),
-    filename VARCHAR(50),
+    filename VARCHAR(50) UNIQUE,
     date_created DATE,
     date_updated DATE,
     id_user INTEGER NOT NULL,
