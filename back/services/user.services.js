@@ -84,7 +84,7 @@ const update = (user, callback) => {
             if (error) {
                 return callback(error);
             }
-            return callback(null, "Champs modifié avec succès");
+            return callback(null, "Champs modifiés avec succès");
         });
     });
 }
