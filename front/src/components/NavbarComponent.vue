@@ -1,6 +1,6 @@
 <template>
     <nav :class="$route.path === '/login' ? 'd-none' : routes.includes($route.path) ? '' : 'd-none'"
-        class="navbar m-0 p-0" style="background: #65558F;">
+        class="navbar m-0 p-0" :style="{ background: purple.color_11 }">
         <!-- TODO color utils -->
         <router-link to="/" class="fw-bold text-white text-decoration-none ps-2">SQLearning</router-link>
 
@@ -23,13 +23,16 @@
 
 <script>
 import { AuthEvent } from '@/utils/auth';
+import { purple } from '@/utils/colors';
 
 export default {
     data() {
         return {
             isAuthenticated: !!localStorage.getItem('uid'),
             items: [],
-            routes: []
+            routes: [],
+
+            purple
         }
     },
 
@@ -43,8 +46,6 @@ export default {
     },
 
     mounted() {
-        this.routes = this.items.map(item => item.to);
-
         this.$nextTick(() => this.moveSelector());
         window.addEventListener('resize', () => {
             setTimeout(() => { this.moveSelector(); }, 500);
@@ -80,10 +81,13 @@ export default {
             this.items = [
                 { to: '/', icon: 'bi bi-house', label: 'Accueil' },
                 { to: '/databases', icon: 'bi bi-clipboard-data', label: 'Bases de données' },
+                { to: '/databases/create', icon: 'bi bi-plus-circle', label: 'Ajouter une base de données' }, // TODO !
                 this.isAuthenticated ?
                     { to: '/profile', icon: 'bi bi-person', label: 'Profil' } :
                     { to: '/login', icon: 'bi bi-person', label: 'Se connecter' },
-            ]
+            ];
+
+            this.routes = this.items.map(item => item.to);
         }
     }
 }

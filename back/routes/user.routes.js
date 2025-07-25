@@ -82,7 +82,7 @@ router.get("/:id", controllers.getUser);
  *                    properties:
  *                      id:
  *                        type: string
- *                        example: "mSc99LTgQdZnQoUwOwy"
+ *                        example: "wTF90JTLsDlv13cMbb2171ajMdnC"
  *                      firstname:
  *                        type: string
  *                        example: "Jeanne"
@@ -129,7 +129,7 @@ router.post("/", controllers.insert);
  *                    properties:
  *                      id:
  *                        type: string
- *                        example: "mSc99LTgQdZnQoUwOwy"
+ *                        example: "wTF90JTLsDlv13cMbb2171ajMdnC"
  *                      firstname:
  *                        type: string
  *                        example: "Jeanne"
