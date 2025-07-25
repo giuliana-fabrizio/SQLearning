@@ -12,7 +12,7 @@
                 </div>
             </div>
             <!-- TODO v-if admin -->
-            <button @click="() => { this.$router.push({ name: 'home' }); }"
+            <button @click="() => { this.$router.push({ name: 'create_db' }); }"
                 class="btn mb-4 pe-4 ps-4 rounded-pill text-white" :style="{ background: purple.color_11 }">
                 <i class="bi bi-plus-circle me-1"></i>
                 Ajouter

@@ -4,10 +4,6 @@
     color: #49454F
 }
 
-.divider {
-    width: 220px;
-}
-
 
 /* ============================================================================ filters */
 
@@ -47,7 +43,36 @@ color {
     color: #6750A4; /* 12 */
 }
 
-    
+
+/* ============================================================================ create or update database */
+
+.label-form-database {
+    font-size: 12px;
+    color: #49454F
+}
+
+.textarea-database {
+    height: 0px;
+}
+
+.bg-input-database,
+.bg-input-database:focus,
+.bg-input-database:-webkit-autofill {
+    border: none !important;
+    border-bottom: 2px solid #49454F !important;
+    -webkit-box-shadow: 0 0 0px 1000px #E6E0E9 inset !important;
+}
+
+.input-database::file-selector-button {
+    background-color: #E6E0E9 !important;
+}
+
+.questions-container {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+
 /* ============================================================================ authentification */
 
 .img-auth {
@@ -80,7 +105,8 @@ color {
 .icon-avatar {
     font-size: 80px;
     height: 80px;
-    width: 80px;;
+    width: 80px;
+    ;
 }
 
 .img-avatar,

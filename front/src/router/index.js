@@ -8,6 +8,7 @@ import ForgotPasswordView from '@/views/ForgotPasswordView.vue';
 import ProfileView from '@/views/ProfileView.vue';
 
 import ErrorView from '@/views/ErrorView.vue';
+import CreateOrUpdateDatabaseView from '@/views/CreateOrUpdateDatabaseView.vue';
 
 Vue.use(VueRouter);
 
@@ -37,6 +38,11 @@ const routes = [
         path: '/databases',
         name: 'databases',
         component: ListDatabasesView
+    },
+    {
+        path: '/databases/create',
+        name: 'create_db',
+        component: CreateOrUpdateDatabaseView
     },
     /** ============================================== Error */
     {

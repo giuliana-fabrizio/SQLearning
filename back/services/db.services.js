@@ -40,6 +40,28 @@ const getDatabases = (filters, callback) => {
     });
 }
 
+const createDatabase = async (database, callback) => {
+    db.run(db_queries.createDatabase,
+        [
+            database.name,
+            database.description,
+            database.filename,
+            database.id_user
+        ],
+        (error, result) => {
+            if (error) { return callback(error); }
+
+            db.get(db_queries.getDatabaseId, [database.name], (_, res) => {
+                for (const question of database.questions) {
+                    createQuestion(question, res.id);
+                }
+            });
+
+            return callback(null, result);
+        }
+    );
+}
+
 const deleteDatabase = async (id, callback) => {
     db.run(question_queries.deleteQuestions, [id], (error) => {
         if (error) {
@@ -54,7 +76,21 @@ const deleteDatabase = async (id, callback) => {
     });
 }
 
+const createQuestion = (question, id_database) => {
+    db.run(
+        question_queries.createQuestion,
+        [
+            question.label,
+            question.expected_result,
+            question.best_answer,
+            id_database
+        ],
+        (error) => { if (error) { console.error(`Create question : ${error}`) } }
+    );
+}
+
 module.exports = {
     getDatabases: getDatabases,
+    createDatabase: createDatabase,
     deleteDatabase: deleteDatabase
 }
