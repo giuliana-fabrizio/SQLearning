@@ -47,7 +47,7 @@ export default {
         submit(database) {
             axios.post(`http://localhost:${this.port}/database`, { database: database })
                 .then(_ => {
-                    this.$router.push({ name: 'databases' })
+                    this.uploadFile(database);
                 })
                 .catch(error => {
                     this.alert = {
@@ -56,6 +56,20 @@ export default {
                         show: true
                     }
                 });
+        },
+
+        uploadFile(database) {
+            const formData = new FormData();
+            formData.append('file', database.file);
+
+            axios.post(`http://localhost:${this.port}/database/upload`, formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(_ => { this.$router.push({ name: 'databases' }); })
+                .catch(error => { console.error(error); });
         },
 
         closeAlert() { this.updateAlert("", "", false); },

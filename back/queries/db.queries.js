@@ -7,6 +7,8 @@ const getDatabases = "\
 
 const getDatabaseId = "select id from database where name like ?";
 
+const getDatabaseFilename = "select filename from database where id = ?";
+
 const createDatabase = "\
     insert into database(name, description, filename, date_created, date_updated, id_user)\
     values (?, ?, ?, CURRENT_DATE, CURRENT_DATE, ?);\
@@ -17,6 +19,7 @@ const deleteDatabase = "delete from database where id = $1;";
 module.exports = {
     getDatabases: getDatabases,
     getDatabaseId: getDatabaseId,
+    getDatabaseFilename: getDatabaseFilename,
     createDatabase: createDatabase,
     deleteDatabase: deleteDatabase
 }

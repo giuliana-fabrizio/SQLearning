@@ -1,7 +1,20 @@
 const express = require("express");
-const controllers = require("../controllers/db.controllers");
+const multer = require('multer');
+const controllers = require("../controllers/db.controller");
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'uploads/')
+    },
+
+    filename: function (req, file, callback) {
+        callback(null, file.originalname) 
+    }
+});
+const upload = multer({ storage: storage });
+router.post("/upload", upload.single('file'), controllers.uploadFile);
 
 /**
  * @swagger

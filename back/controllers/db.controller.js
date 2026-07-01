@@ -1,4 +1,4 @@
-const services = require('../services/db.services');
+const services = require('../services/db.service');
 
 const getDatabases = (req, res) => {
     const filters = req.query;
@@ -8,6 +8,14 @@ const getDatabases = (req, res) => {
         }
         return res.status(200).send({ success: 1, data: data });
     });
+}
+
+const uploadFile = (req, res) => {
+    const file = req.file; 
+    if (!file) {
+        return res.status(500).send({ success: 0 });
+    }
+    return res.status(200).send({ success: 1 });
 }
 
 const createDatabase = (req, res) => {
@@ -31,6 +39,7 @@ const deleteDatabase = (req, res) => {
 
 module.exports = {
     getDatabases: getDatabases,
+    uploadFile: uploadFile,
     createDatabase: createDatabase,
     deleteDatabase: deleteDatabase
 }

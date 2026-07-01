@@ -1,6 +1,9 @@
 const db = require("../db/connect");
+const fs = require('fs');
+const path = require("path");
 const db_queries = require("../queries/db.queries");
 const question_queries = require("../queries/question.queries");
+const question_service = require("./question.service");
 
 const getDatabases = (filters, callback) => {
     let query = db_queries.getDatabases;
@@ -53,7 +56,7 @@ const createDatabase = async (database, callback) => {
 
             db.get(db_queries.getDatabaseId, [database.name], (_, res) => {
                 for (const question of database.questions) {
-                    createQuestion(question, res.id);
+                    question_service.createQuestion(question, res.id);
                 }
             });
 
@@ -63,30 +66,20 @@ const createDatabase = async (database, callback) => {
 }
 
 const deleteDatabase = async (id, callback) => {
-    db.run(question_queries.deleteQuestions, [id], (error) => {
-        if (error) {
-            return callback(error);
-        }
-        db.run(db_queries.deleteDatabase, [id], (err, res) => {
-            if (err) {
-                return callback(error);
-            }
-            return callback(null, res);
+    db.get(db_queries.getDatabaseFilename, [id], (error, result) => {
+        if (error) { return callback(error); }
+
+        fs.unlink(path.join("uploads", result.filename), (err) => { console.error(err); });
+
+        db.run(question_queries.deleteQuestions, [id], (err) => {
+            if (err) { return callback(err); }
+
+            db.run(db_queries.deleteDatabase, [id], (e, res) => {
+                if (e) { return callback(e); }
+                return callback(null, res);
+            });
         });
     });
-}
-
-const createQuestion = (question, id_database) => {
-    db.run(
-        question_queries.createQuestion,
-        [
-            question.label,
-            question.expected_result,
-            question.best_answer,
-            id_database
-        ],
-        (error) => { if (error) { console.error(`Create question : ${error}`) } }
-    );
 }
 
 module.exports = {

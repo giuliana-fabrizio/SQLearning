@@ -5,8 +5,8 @@ const express = require("express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
-const db_routers = require("./routes/db.routes");
-const user_routers = require("./routes/user.routes");
+const db_routers = require("./routes/db.route");
+const user_routers = require("./routes/user.route");
 
 // ======================================================================= Load environment variables
 

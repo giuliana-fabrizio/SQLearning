@@ -1,4 +1,4 @@
-const services = require("../services/user.services");
+const services = require("../services/user.service");
 
 const getFields = (_, res) => {
     services.getFields((error, data) => {
