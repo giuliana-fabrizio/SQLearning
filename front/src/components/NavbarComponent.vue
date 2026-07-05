@@ -1,5 +1,5 @@
 <template>
-    <nav :class="$route.path === '/login' ? 'd-none' : routes.includes($route.path) ? '' : 'd-none'"
+    <nav :class="displayNavbar()"
         class="navbar m-0 p-0" :style="{ background: purple.color_11 }">
         <!-- TODO color utils -->
         <router-link to="/" class="fw-bold text-white text-decoration-none ps-2">SQLearning</router-link>
@@ -10,7 +10,7 @@
                 <div class="right"></div>
             </div>
             <ul class="m-0">
-                <li v-for="item in items" :key="item.to" :class="{ active: $route.path === item.to }" ref="nav_items">
+                <li v-for="item in items" :key="item.to" :class="{ active: getClass(item) }" ref="nav_items">
                     <router-link :to="item.to" class="d-block d-flex text-decoration-none text-white position-relative">
                         <i class="me-md-2" :class="item.icon"></i>
                         <span class="d-none d-md-block">{{ item.label }}</span>
@@ -58,11 +58,44 @@ export default {
     },
 
     methods: {
+        displayNavbar() {
+            if (
+                this.$route.path === '/login' ||
+                this.$route.path === '/register' ||
+                this.$route.path === '/reset_password'
+            )
+                return 'd-none';
+            return '';
+        },
+
+        getClass(item) {
+            if (this.$route.path === item.to) return true;
+
+            for (const i of this.items) {
+                if (i.label === item.label && i.children) {
+                    for (const c of i.children) {
+                        if (this.$route.path.includes(c)) return true;
+                    }
+                }
+            }
+
+            return false;
+        },
+
         moveSelector() {
             const nav_items = this.$refs.nav_items;
 
-            let activeIndex = this.items.findIndex(item => item.to === this.$route.path);
-            if (activeIndex === -1) { activeIndex = 0; }
+            let activeIndex = 0;
+
+            for (const id in this.items) {
+                if (this.$route.path === this.items[id].to) activeIndex = id;
+
+                if (this.items[id].children) {
+                    for (const c of this.items[id].children) {
+                        if (this.$route.path.includes(c)) activeIndex = id;
+                    }
+                }
+            }
 
             const elem_active = nav_items[activeIndex];
 
@@ -80,8 +113,12 @@ export default {
         updateItems() {
             this.items = [
                 { to: '/', icon: 'bi bi-house', label: 'Accueil' },
-                { to: '/databases', icon: 'bi bi-clipboard-data', label: 'Bases de données' },
-                { to: '/databases/create', icon: 'bi bi-plus-circle', label: 'Ajouter une base de données' }, // TODO !
+                {
+                    to: '/databases',
+                    icon: 'bi bi-clipboard-data',
+                    label: 'Bases de données',
+                    children: ["/create", "/edit"]
+                },
                 this.isAuthenticated ?
                     { to: '/profile', icon: 'bi bi-person', label: 'Profil' } :
                     { to: '/login', icon: 'bi bi-person', label: 'Se connecter' },
