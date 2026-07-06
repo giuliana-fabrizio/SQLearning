@@ -14,6 +14,14 @@ const verif_answers = async (database) => {
         const sdb = await connect_to_db(database.filename);
 
         for (const question of database.questions) {
+            if (
+                question.best_answer.includes("create") ||
+                question.best_answer.includes("update") ||
+                question.best_answer.includes("delete")
+            ) {
+                return "Queries mustn't includes create or update or delete query.";
+            }
+
             const result = await sdb.all(question.best_answer);
 
             const expected_result = JSON.parse(question.expected_result);
