@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end"
-                            :class="database_values.questions.length !== 0 ? 'mt-3' : ''">
+                            :class="database_values.questions?.length !== 0 ? 'mt-3' : ''">
                             <button @click="addQuestion" type="button"" class=" btn"
                                 :style="{ border: `1px solid ${purple.color_11}`, color: purple.color_11 }">
                                 Ajouter une question
@@ -94,15 +94,7 @@ export default {
     data: () => ({
         port: 0,
         model: '',
-        database_values: {
-            id: "",
-            name: "",
-            description: "",
-            filename: "",
-            file: "",
-            id_user: localStorage.getItem("uid"),
-            questions: []
-        },
+        database_values: {},
 
         purple
     }),
@@ -111,10 +103,12 @@ export default {
         database: Object
     },
 
-    created() { },
+    created() {
+        this.database_values = { ...this.database };
+    },
 
     watch: {
-        database: function (database, _) { this.database_values = { ...database }; },
+        database: function (database, _) { this.database_values = { ...database }; }
     },
 
     methods: {

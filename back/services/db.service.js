@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require("path");
 const db_queries = require("../queries/db.queries");
 const question_queries = require("../queries/question.queries");
+const exec_service = require("./exec.service");
 const question_service = require("./question.service");
 
 const getDatabases = (filters, callback) => {
@@ -44,6 +45,11 @@ const getDatabases = (filters, callback) => {
 }
 
 const createDatabase = async (database, callback) => {
+    if (database.questions) {
+        const res = await exec_service.verif_answers(database);
+        if (res != "OK") { return callback(res); }
+    }
+
     db.run(db_queries.createDatabase,
         [
             database.name,
@@ -54,11 +60,13 @@ const createDatabase = async (database, callback) => {
         (error, result) => {
             if (error) { return callback(error); }
 
-            db.get(db_queries.getDatabaseId, [database.name], (_, res) => {
-                for (const question of database.questions) {
-                    question_service.createQuestion(question, res.id);
-                }
-            });
+            if (database.questions) {
+                db.get(db_queries.getDatabaseId, [database.name], (_, res) => {
+                    for (const question of database.questions) {
+                        question_service.createQuestion(question, res.id);
+                    }
+                });
+            }
 
             return callback(null, result);
         }

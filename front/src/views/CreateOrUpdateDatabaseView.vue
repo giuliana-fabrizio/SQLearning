@@ -5,7 +5,7 @@
 
             <TitleComponent title="Ajouter une base de données" />
 
-            <FormDatabaseComponent @submit="submit" />
+            <FormDatabaseComponent @submit="submit" :database="database" />
         </div>
     </div>
 </template>
@@ -29,6 +29,15 @@ export default {
 
     data: () => ({
         port: 0,
+        database: {
+            id: "",
+            name: "",
+            description: "",
+            filename: "",
+            file: "",
+            id_user: localStorage.getItem("uid"),
+            questions: []
+        },
 
         alert: {
             type: "",
@@ -45,20 +54,6 @@ export default {
 
     methods: {
         submit(database) {
-            axios.post(`http://localhost:${this.port}/database`, { database: database })
-                .then(_ => {
-                    this.uploadFile(database);
-                })
-                .catch(error => {
-                    this.alert = {
-                        type: 'alert-danger',
-                        message: error.message,
-                        show: true
-                    }
-                });
-        },
-
-        uploadFile(database) {
             const formData = new FormData();
             formData.append('file', database.file);
 
@@ -68,8 +63,16 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             })
+                .then(_ => { this.createDatabase(database) })
+                .catch(error => { this.updateAlert('alert-danger', error, true) });
+        },
+
+        createDatabase(database) {
+            axios.post(`http://localhost:${this.port}/database`, { database: database })
                 .then(_ => { this.$router.push({ name: 'databases' }); })
-                .catch(error => { console.error(error); });
+                .catch(error => {
+                    this.updateAlert('alert-danger', error.response.data.data, true)
+                });
         },
 
         closeAlert() { this.updateAlert("", "", false); },
