@@ -62,7 +62,8 @@ export default {
             if (
                 this.$route.path === '/login' ||
                 this.$route.path === '/register' ||
-                this.$route.path === '/reset_password'
+                this.$route.path === '/reset_password' ||
+                !this.routes.includes(this.$route.path)
             )
                 return 'd-none';
             return '';
