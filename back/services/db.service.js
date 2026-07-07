@@ -55,7 +55,11 @@ const getDatabase = async (id, callback) => {
 const createDatabase = async (database, callback) => {
     if (database.questions) {
         const res = await exec_service.verif_answers(database);
-        if (res != "OK") { return callback(res); }
+
+        if (res != "OK") {
+            fs.unlink(path.join("uploads", database.filename), (err) => { if (err) console.error(err); });
+            return callback(res);
+        }
     }
 
     db.run(db_queries.createDatabase,
@@ -84,7 +88,11 @@ const createDatabase = async (database, callback) => {
 const updateDatabase = async (id, database, callback) => {
     if (database.questions) {
         const res = await exec_service.verif_answers(database);
-        if (res != "OK") { return callback(res); }
+
+        if (res != "OK") {
+            fs.unlink(path.join("uploads", database.filename), (err) => { if (err) console.error(err); });
+            return callback(res);
+        }
     }
 
     db.get(db_queries.getDatabase, [id], (error, result) => {
