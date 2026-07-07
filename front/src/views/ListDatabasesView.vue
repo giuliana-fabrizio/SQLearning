@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <TitleComponent title="Bases de données" />
-        <div class="d-flex flex-column flex-sm-row justify-content-between mt-5">
+        <div class="d-flex flex-wrap justify-content-between mt-5">
             <FiltersComponent :filters="filters" @apply_filters="getDatabases" />
 
             <div class="d-none d-sm-block mb-4">
@@ -11,8 +11,8 @@
                         class="rounded-pill text-center search-by-name" placeholder="Rechercher par nom">
                 </div>
             </div>
-            <!-- TODO v-if admin -->
-            <button @click="() => { this.$router.push({ name: 'create_db' }); }"
+
+            <button v-if="current_user" @click="() => { this.$router.push({ name: 'create_db' }); }"
                 class="btn mb-4 pe-4 ps-4 rounded-pill text-white" :style="{ background: purple.color_11 }">
                 <i class="bi bi-plus-circle me-1"></i>
                 Ajouter
@@ -45,6 +45,8 @@ export default {
         port: 0,
         search_name: "",
         filters: {},
+
+        current_user: localStorage.getItem("uid"),
 
         purple
     }),

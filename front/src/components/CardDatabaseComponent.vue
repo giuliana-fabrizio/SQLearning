@@ -12,22 +12,25 @@
 
         <div :style="{ background: purple.color_1 }">
             <div class="p-3 row">
-                <div class="col-sm-3 col-md-2 col-lg-1 d-none d-sm-block">
-                    <!-- <img :src="'../../public/image/avatars'" alt="Image" class="w-100"> --> TODO
+                <div class="align-items-center col-2 col-lg-1 d-flex justify-content-center m-0 p-0">
+                    <img :src="avatarURL" alt="Owner avatar" class="img-avatar-db">
                 </div>
-                <div class="col-8 col-md-9 col-lg-10">
+
+                <div class="col-8 col-md-9 col-lg-10 text-start">
                     <p class="fs-5 mb-1">{{ data.name }}</p>
                     <p class="mb-1" style="color: #49454F">
-                        {{ data.description.substring(0, 120) + "..." }}
+                        <span class="d-sm-none">{{ data.description.substring(0, 30) + "..." }}</span>
+                        <span class="d-none d-sm-block">{{ data.description.substring(0, 120) + "..." }}</span>
                     </p>
                 </div>
-                <div class="align-items-start col-4 col-sm-1 d-flex justify-content-end">
+
+                <div class="align-items-start col-2 col-md-1 d-flex justify-content-center">
                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nombre d'inscrits"
                         class="badge me-1 rounded-circle badge-peoples" :style="{ background: purple.color_8 }">
                         <span class="text-white" style="font-size: small;">{{ data.peoples }}</span>
                     </div>
 
-                    <div v-if="current_user === data.id_user || role === 1" class="dropdown dropdown-plus">
+                    <div v-if="current_user === data.id_user || role == 1" class="dropdown dropdown-plus">
                         <a role="button" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle-plus"
                             :style="{ color: purple.color_11 }">
                             <i class="bi bi-three-dots-vertical"></i>
@@ -88,6 +91,16 @@ export default {
 
     props: {
         data: Object
+    },
+
+    computed: {
+        avatarURL() {
+            if (this.data && this.data.avatar) {
+                return require(`@/assets/avatars/${this.data.avatar}.png`);
+            } else {
+                return require(`@/assets/avatars/default.png`);
+            }
+        }
     },
 
     mounted() {

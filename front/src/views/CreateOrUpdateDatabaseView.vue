@@ -3,7 +3,7 @@
         <div class="mt-5 mb-5">
             <AlertComponent :alert_type="alert.type" :message="alert.message" :show="alert.show" @close="closeAlert" />
 
-            <TitleComponent title="Ajouter une base de données" />
+            <TitleComponent :title="database.id ? 'Modifier une base de données' : 'Ajouter une base de données'" />
 
             <div class="align-items-center d-flex mt-4">
                 <img src="@/assets/warning.png" class="d-none d-md-block img-warning me-1">
