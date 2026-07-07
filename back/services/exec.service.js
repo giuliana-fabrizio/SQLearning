@@ -22,15 +22,9 @@ const verif_answers = async (database) => {
                 return "Queries mustn't includes create or update or delete query.";
             }
 
-            const result = await sdb.all(question.best_answer);
-
-            const expected_result = JSON.parse(question.expected_result);
-
-            if (JSON.stringify(result) !== JSON.stringify(expected_result)) {
-                await sdb.close();
-                return "The result is not what was expected.";
-            }
+            await sdb.all(question.best_answer);
         }
+
         await sdb.close();
         return "OK";
     } catch (e) {

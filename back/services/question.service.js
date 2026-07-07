@@ -6,7 +6,6 @@ const createQuestion = (question, id_database) => {
         question_queries.createQuestion,
         [
             question.label,
-            question.expected_result,
             question.best_answer,
             id_database
         ],

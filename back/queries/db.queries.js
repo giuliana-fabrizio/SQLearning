@@ -11,7 +11,6 @@ const getDatabase = "\
             json_object(\
                 'id', q.id,\
                 'label', q.label,\
-                'expected_result', q.expected_result,\
                 'best_answer', q.best_answer\
             )\
         ) filter (where q.id is not null),\

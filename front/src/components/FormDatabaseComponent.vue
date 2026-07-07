@@ -48,14 +48,6 @@
                                 </div>
 
                                 <div class="mb-5" :style="{ background: purple.color_3 }">
-                                    <label for="label" class="ps-2 text-start w-100 label-form-database">Résultat
-                                        attendu</label>
-                                    <textarea id="label" v-model="question.expected_result"
-                                        class="form-control ps-2 pt-0 rounded-0 bg-input-database textarea-database"
-                                        required></textarea>
-                                </div>
-
-                                <div class="mb-5" :style="{ background: purple.color_3 }">
                                     <label for="label" class="ps-2 text-start w-100 label-form-database">Réponse
                                         optimale</label>
                                     <textarea id="label" v-model="question.best_answer"
@@ -123,7 +115,6 @@ export default {
         addQuestion() {
             this.database_values.questions.push({
                 label: "",
-                expected_result: "",
                 best_answer: ""
             });
         },

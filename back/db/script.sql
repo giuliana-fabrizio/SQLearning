@@ -35,7 +35,6 @@ CREATE TABLE DATABASE(
 CREATE TABLE QUESTION(
     id INTEGER CONSTRAINT pk_question PRIMARY KEY AUTOINCREMENT,
     label TEXT,
-    expected_result TEXT,
     best_answer TEXT,
     id_database INTEGER NOT NULL,
     CONSTRAINT fk_question_database FOREIGN KEY(id_database) REFERENCES DATABASE(id)
