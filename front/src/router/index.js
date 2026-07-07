@@ -44,6 +44,11 @@ const routes = [
         name: 'create_db',
         component: CreateOrUpdateDatabaseView
     },
+    {
+        path: '/databases/edit/:id',
+        name: 'edit_db',
+        component: CreateOrUpdateDatabaseView
+    },
     /** ============================================== Error */
     {
         path: '*',

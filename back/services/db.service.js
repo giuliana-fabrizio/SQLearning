@@ -44,6 +44,14 @@ const getDatabases = (filters, callback) => {
     });
 }
 
+const getDatabase = async (id, callback) => {
+    db.get(db_queries.getDatabase, [id], (error, result) => {
+        if (error) { return callback(error); }
+        if (result) { result.questions = JSON.parse(result.questions); }
+        return callback(null, result);
+    });
+}
+
 const createDatabase = async (database, callback) => {
     if (database.questions) {
         const res = await exec_service.verif_answers(database);
@@ -73,6 +81,44 @@ const createDatabase = async (database, callback) => {
     );
 }
 
+const updateDatabase = async (id, database, callback) => {
+    if (database.questions) {
+        const res = await exec_service.verif_answers(database);
+        if (res != "OK") { return callback(res); }
+    }
+
+    db.get(db_queries.getDatabase, [id], (error, result) => {
+        if (error) { return callback(error); }
+
+        if (result.filename != database.filename) {
+            fs.unlink(path.join("uploads", result.filename), (err) => { console.error(err); });
+        }
+
+        db.run(db_queries.updateDatabase,
+        [
+            database.name,
+            database.description,
+            result.filename != database.filename ? database.filename : result.filename,
+            result.id
+        ],
+        (err, res) => {
+            if (err) { return callback(err); }
+
+            if (database.questions) {
+                db.run(question_queries.deleteQuestions, [result.id], (err) => {
+                    if (err) { return callback(err); }
+
+                    for (const question of database.questions) {
+                        question_service.createQuestion(question, result.id);
+                    }
+                });
+            }
+
+            return callback(null, result);
+        });
+    });
+}
+
 const deleteDatabase = async (id, callback) => {
     db.get(db_queries.getDatabaseFilename, [id], (error, result) => {
         if (error) { return callback(error); }
@@ -92,6 +138,8 @@ const deleteDatabase = async (id, callback) => {
 
 module.exports = {
     getDatabases: getDatabases,
+    getDatabase: getDatabase,
     createDatabase: createDatabase,
+    updateDatabase: updateDatabase,
     deleteDatabase: deleteDatabase
 }

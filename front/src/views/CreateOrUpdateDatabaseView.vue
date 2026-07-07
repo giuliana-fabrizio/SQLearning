@@ -50,25 +50,59 @@ export default {
 
     created() {
         this.port = process.env.VUE_APP_SERVER_PORT;
+        const id = this.$route.params.id;
+
+        if (id) {
+            axios.get(`http://localhost:${this.port}/database/${id}`)
+                .then(res => {
+                    this.database = { ...res.data.data };
+                })
+                .catch(error => { console.error(error); });
+        }
     },
 
     methods: {
         submit(database) {
+            if (!this.$route.params.id) {
+                this.uploadFile(database);
+            } else {
+                if (database.file) {
+                    this.uploadFile(database);
+                } else {
+                    this.updateDatabase(database);
+                }
+            }
+        },
+
+        uploadFile(database) {
             const formData = new FormData();
             formData.append('file', database.file);
 
             axios.post(`http://localhost:${this.port}/database/upload`, formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' }
                 }
-            })
-                .then(_ => { this.createDatabase(database) })
+            )
+                .then(_ => {
+                    if (!this.$route.params.id) {
+                        this.createDatabase(database);
+                    } else {
+                        this.updateDatabase(database);
+                    }
+                })
                 .catch(error => { this.updateAlert('alert-danger', error, true) });
         },
 
         createDatabase(database) {
             axios.post(`http://localhost:${this.port}/database`, { database: database })
+                .then(_ => { this.$router.push({ name: 'databases' }); })
+                .catch(error => {
+                    this.updateAlert('alert-danger', error.response.data.data, true)
+                });
+        },
+
+        updateDatabase(database) {
+            axios.put(`http://localhost:${this.port}/database/${database.id}`, { database: database })
                 .then(_ => { this.$router.push({ name: 'databases' }); })
                 .catch(error => {
                     this.updateAlert('alert-danger', error.response.data.data, true)

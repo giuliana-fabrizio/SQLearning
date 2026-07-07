@@ -14,7 +14,10 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
+
 router.post("/upload", upload.single('file'), controllers.uploadFile);
+router.post("/", controllers.createDatabase);
+router.put("/:id", controllers.updateDatabase);
 
 /**
  * @swagger
@@ -33,54 +36,24 @@ router.get("/", controllers.getDatabases);
 
 /**
  * @swagger
- * /database:
- *   post:
- *      description: Use to create a database
+ * /database/{id}:
+ *   get:
+ *      description: Use to display a database's details
  *      tags:
  *          - DATABASE
  *      parameters:
- *          - in: body
- *            name: database
- *            schema:
- *              type: object
- *              required:
- *                - database
- *              properties:
- *                  database:
- *                    type: object
- *                    properties:
- *                      name:
- *                        type: string
- *                        example: "Minecraft"
- *                      description:
- *                        type: string
- *                        example: "A wonderful database about different worlds in the game"
- *                      filename:
- *                        type: string
- *                        example: "Minecraft.sql"
- *                      id_user:
- *                        type: string
- *                        example: "wTF90JTLsDlv13cMbb2171ajMdnC"
- *                      questions:
- *                        type: array
- *                        items:
- *                          type: object
- *                          properties:
- *                            label:
- *                              type: string
- *                              example: "Count different worlds"
- *                            expected_result:
- *                              type: string
- *                              example: "3"
- *                            best_answer:
- *                              type: string
- *                              example: "select count(id) as counted from database"
+ *          - in: path
+ *            name: id
+ *            type: string
+ *            required: true
  *      responses:
  *          "200":
- *              description: Database deleted successfully
+ *              description: Database's details listed successfully
  *          "500":
  *              description: Internal server error
  */
+router.get("/:id", controllers.getDatabase);
+
 router.post("/", controllers.createDatabase);
 
 /**

@@ -34,7 +34,8 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end  mt-2 p-0">
                             <li>
-                                <button class="btn btn-sm dropdown-item text-success">
+                                <button @click="() => { this.$router.push(`/databases/edit/${data.id}`); }"
+                                    class="btn btn-sm dropdown-item text-success">
                                     <i class="bi bi-pencil-square me-2"></i>Éditer
                                 </button>
                             </li>

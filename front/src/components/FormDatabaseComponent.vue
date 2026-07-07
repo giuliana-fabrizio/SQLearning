@@ -19,11 +19,14 @@
                         </div>
 
                         <div :style="{ background: purple.color_3 }">
-                            <label for="file" class="ps-2 text-start w-100 label-form-database">Base de données <span
-                                    class="fst-italic">(fichier
-                                    .db)</span></label>
+                            <label for="file" class="ps-2 text-start w-100 label-form-database">
+                                Base de données
+                                <span class="fst-italic">(fichier .db)</span>
+                                <span v-if="database_values.filename" class="fst-italic"> - actuellement : {{ database_values.filename }}</span>
+                            </label>
                             <input @change="changeFile" type="file" id="file" accept=".db"
-                                class="form-control ps-2 pt-0 rounded-0 bg-input-database input-database" required>
+                                class="form-control ps-2 pt-0 rounded-0 bg-input-database input-database"
+                                :required="!database_values.id">
                         </div>
                     </div>
 
