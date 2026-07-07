@@ -5,6 +5,16 @@
 
             <TitleComponent title="Ajouter une base de données" />
 
+            <div class="align-items-center d-flex mt-4">
+                <img src="@/assets/warning.png" class="d-none d-md-block img-warning me-1">
+
+                <p class="mb-0 ms-1 text-start">
+                    Pour des raisons de sécurité et de stabilité de la plateforme, seules les requêtes de lecture
+                    <span class="fst-italic">(SELECT)</span>
+                    sont autorisées.
+                </p>
+            </div>
+
             <FormDatabaseComponent @submit="submit" :database="database" />
         </div>
     </div>

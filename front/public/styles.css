@@ -46,6 +46,11 @@ color {
 
 /* ============================================================================ create or update database */
 
+.img-warning {
+    height: 25px !important;
+    width: 25px !important;
+}
+
 .label-form-database {
     font-size: 12px;
     color: #49454F
@@ -68,7 +73,7 @@ color {
 }
 
 .questions-container {
-    max-height: 600px;
+    max-height: 550px;
     overflow-y: auto;
 }
 

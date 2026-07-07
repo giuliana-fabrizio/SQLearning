@@ -91,7 +91,7 @@ const updateDatabase = async (id, database, callback) => {
         if (error) { return callback(error); }
 
         if (result.filename != database.filename) {
-            fs.unlink(path.join("uploads", result.filename), (err) => { console.error(err); });
+            fs.unlink(path.join("uploads", result.filename), (err) => { if (err) console.error(err); });
         }
 
         db.run(db_queries.updateDatabase,
@@ -123,7 +123,7 @@ const deleteDatabase = async (id, callback) => {
     db.get(db_queries.getDatabaseFilename, [id], (error, result) => {
         if (error) { return callback(error); }
 
-        fs.unlink(path.join("uploads", result.filename), (err) => { console.error(err); });
+        fs.unlink(path.join("uploads", result.filename), (err) => { if (err) console.error(err); });
 
         db.run(question_queries.deleteQuestions, [id], (err) => {
             if (err) { return callback(err); }
