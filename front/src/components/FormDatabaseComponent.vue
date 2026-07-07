@@ -38,7 +38,24 @@
                     <div class="col-12 col-md-6">
                         <div class="questions-container">
                             <div v-for="(question, key) in database_values.questions" :key="key">
-                                <h5 class="fw-bold mb-3 text-start">Question {{ key + 1 }}</h5>
+                                <div class="align-items-center d-flex justify-content-between mb-3">
+                                    <h5 class="fw-bold mb-0 text-start">Question {{ key + 1 }}</h5>
+
+                                    <div class="align-items-center d-flex">
+                                        <button v-if="key > 0" @click="moveUpQuestion(key)" type="button" class="btn btn-action-db me-3">
+                                            <img src="@/assets/move-up.png" class="img-action-db">
+                                        </button>
+
+                                        <button v-if="key + 1 < database_values.questions.length" @click="moveDownQuestion(key)" type="button" class="btn btn-action-db me-3">
+                                            <img src="@/assets/move-down.png" class="img-action-db">
+                                        </button>
+
+                                        <button @click="removeQuestion(key)" type="button" class="btn btn-action-db">
+                                            <img src="@/assets/remove.png" class="img-action-db">
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div class="mb-5" :style="{ background: purple.color_3 }">
                                     <label for="label" class="ps-2 text-start w-100 label-form-database">Intitulé de la
                                         question</label>
@@ -59,7 +76,7 @@
 
                         <div class="d-flex justify-content-end"
                             :class="database_values.questions?.length !== 0 ? 'mt-3' : ''">
-                            <button @click="addQuestion" type="button"" class=" btn"
+                            <button @click="addQuestion" type="button" class=" btn"
                                 :style="{ border: `1px solid ${purple.color_11}`, color: purple.color_11 }">
                                 Ajouter une question
                             </button>
@@ -117,6 +134,20 @@ export default {
                 label: "",
                 best_answer: ""
             });
+        },
+
+        moveUpQuestion(key){
+            const questionToMove = this.database_values.questions.splice(key, 1)[0];
+            this.database_values.questions.splice(key - 1, 0, questionToMove);
+        },
+
+        moveDownQuestion(key){
+            const questionToMove = this.database_values.questions.splice(key, 1)[0];
+            this.database_values.questions.splice(key + 1, 0, questionToMove);
+        },
+
+        removeQuestion(key){
+            this.database_values.questions.splice(key, 1);
         },
 
         submit() {

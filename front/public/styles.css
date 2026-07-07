@@ -46,6 +46,21 @@ color {
 
 /* ============================================================================ create or update database */
 
+.btn-action-db {
+    max-width: min-content !important;
+    padding: 0px !important;
+}
+
+/* .btn-action-db:active {
+    color: transparent !important;
+    border-color: transparent !important;
+} */
+
+.img-action-db {
+    height: 20px !important;
+    width: 20px !important;
+}
+
 .img-warning {
     height: 25px !important;
     width: 25px !important;
